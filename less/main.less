@@ -51,6 +51,11 @@ body {
 				max-width: 260px;
 				width: 60%
 			}
+            button.search {
+                vertical-align: top;
+                background-color: @baseColor;
+				color: white;
+            }
 			div.upload {
 				display: inline-block;
 				vertical-align: top;
@@ -124,25 +129,53 @@ body {
 	}
 	.uploadedImage {
 		margin: 10px 0;
-		border: 1px solid #bbe2ff;
+		border: 2px solid #F1F4F9;
 		img.img {
 			width: 100%;
 		}
 	}
 	.catalogueWrapper {
 		h3.title {
-		
+		  font-size: 20px;
 		}
 		.catalogueContent {
 			ul.wordList {
+                -webkit-padding-start: 0;
 				li.word {
+                    display: block;
+                    padding: 3px 0;
 					a {
-						span.text {
+                        margin-left: 20px;
+                        color: black;
+                        span.text {
 						
 						}
 					}
 				}
+                li.active {
+                    font-weight: bold;
+                    a {
+                        color: inherit;
+                    }
+                }
+                li.active:before {
+                    content: "\f054";
+                    font-family: "Fontawesome";
+                    position: absolute;
+                }
 			}
+            .sidebarText {
+                margin-bottom: 5px;
+            }
+            a.addNewWord {
+                background: black;
+                color: white;
+                .text {
+                    .icon {
+                        padding-right: 10px;
+                    }
+                }
+            }
 		}
 	}
 	.wordInterpretation {
