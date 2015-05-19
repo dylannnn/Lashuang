@@ -1,0 +1,188 @@
+// out: ../css/main.min.css, compress: true, strictMath: true
+@baseColor: black;
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+.RespRow {
+	max-width: none;
+	padding: 75px 40px;
+}
+.RespColsWrapper {
+	position: relative;
+	margin: 0 auto;
+	width: 100%;
+	max-width: 960px;
+	.RespCol {
+		padding: 10px 10px;
+	}
+}
+
+/*HOME*/
+#home {
+	.logoWrapper {
+		margin-top: 10%;
+		a.logo {
+			width:100%;
+			max-width: 400px;
+			display: block;
+			margin:0 auto;
+			img {
+				width: 100%;
+			}
+		}
+	}
+	.tagline {
+		text-align: center;
+		font-size: 32px;
+		span.title {
+			display: block;
+			font-weight: bold;
+		}
+	}
+	.searchInputWrapper {
+		margin-top: 40px;
+		form.searchInput {
+			width: 100%;
+			display: block;
+			text-align: center;
+			input.form-control {
+				display: inline-block;
+				max-width: 260px;
+				width: 60%
+			}
+			div.upload {
+				display: inline-block;
+				vertical-align: top;
+				background-color: @baseColor;
+				color: white;
+			}
+			input[type="file"] {
+				display: none;
+			}
+		}
+	}
+}
+
+/*Dict*/
+#dict {
+	.RespColsWrapper {
+		max-width: inherit;
+	}
+	.RespRow {
+		padding: 0 40px;
+	}
+	.leftCol {
+		border-right: 2px solid #F1F4F9;
+		padding-right: 20px;
+	}
+	.rightCol {
+		padding-left: 20px;
+	}
+	.logoWrapper {
+		margin-top: 5%;
+		a.logo {
+			width:100%;
+			max-width: 400px;
+			display: block;
+			margin:0 auto;
+			img {
+				width: 100%;
+			}
+		}
+	}
+	.tagline {
+		text-align: center;
+		font-size: 24px;
+		span.title {
+			display: block;
+			font-weight: bold;
+		}
+	}
+	.searchInputWrapper {
+		margin-top: 20px;
+		width: 100%;
+		form.searchInput {
+			width: 100%;
+			display: block;
+			text-align: center;
+			input.form-control {
+				display: inline-block;
+				width: 75%;
+				max-width: 165px;
+			}
+			div.upload {
+				display: inline-block;
+				vertical-align: top;
+				background-color: @baseColor;
+				color: white;
+			}
+			input[type="file"] {
+				display: none;
+			}
+		}
+	}
+	.uploadedImage {
+		margin: 10px 0;
+		border: 1px solid #bbe2ff;
+		img.img {
+			width: 100%;
+		}
+	}
+	.catalogueWrapper {
+		h3.title {
+		
+		}
+		.catalogueContent {
+			ul.wordList {
+				li.word {
+					a {
+						span.text {
+						
+						}
+					}
+				}
+			}
+		}
+	}
+	.wordInterpretation {
+		.topBar {
+			.wordWrapper {
+				.word {
+				}
+				.subtitle {
+				}
+			}
+		}
+		.titles {
+			.title {
+				span.text {
+				}
+			}
+		}
+		.editContent {
+			input[type="text"] {
+				width: 100%;
+			}
+		}
+	}
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+	#dict .leftCol {
+		border-right: none;
+	}
+}
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+	#dict .leftCol {
+		border-right: none;
+	}
+}
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+	#dict .leftCol {
+		border-right: none;
+	}
+}
