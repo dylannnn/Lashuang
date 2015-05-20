@@ -128,15 +128,40 @@ body {
 		}
 	}
 	.uploadedImage {
-		margin: 10px 0;
-		border: 2px solid #F1F4F9;
-		img.img {
-			width: 100%;
+		.imgWrapper {
+			margin: 10px 0;
+			border: 2px solid #F1F4F9;
+			img.img {
+				width: 100%;
+			}
+		}
+		.uploadedImageInfo {
+			margin-bottom: 15px;
+			.imageName {
+				font-size: 14px;
+				margin-top: 5px;
+				margin-bottom: 5px;
+				.name {
+					margin-left: 5px;
+				}
+			}
+		}
+		.reUploadBtn {
+			.reUpload {
+				padding: 3px 6px;
+				font-size: 10px;
+				background-color: @baseColor;
+				color: white;
+				span.icon {
+					padding-right: 6px;
+				}
+			}
 		}
 	}
 	.catalogueWrapper {
 		h3.title {
-		  font-size: 20px;
+			font-size: 20px;
+			font-weight: bold;
 		}
 		.catalogueContent {
 			ul.wordList {
@@ -145,7 +170,7 @@ body {
                     display: block;
                     padding: 3px 0;
 					a {
-                        margin-left: 20px;
+                        margin-left: 15px;
                         color: black;
                         span.text {
 						
@@ -159,43 +184,168 @@ body {
                     }
                 }
                 li.active:before {
+					padding-top: 3px;
+					font-size: 10px;
                     content: "\f054";
                     font-family: "Fontawesome";
                     position: absolute;
                 }
 			}
+			.more {
+				.moreBtn {
+					margin-top: 10px;
+					margin-bottom: 10px;
+					padding: 3px 6px;
+					font-size: 10px;
+					background-color: lighten(@baseColor,80%);
+					color: darken(white,80%);
+				}
+			}
             .sidebarText {
+				border-top: 1px solid gray;
                 margin-bottom: 5px;
+				padding-top: 10px;
             }
             a.addNewWord {
-                background: black;
+				padding: 3px 6px;
+				font-size: 10px;
+                background: @baseColor;
                 color: white;
                 .text {
                     .icon {
-                        padding-right: 10px;
+                        padding-right: 6px;
                     }
                 }
             }
 		}
 	}
 	.wordInterpretation {
+		margin: 75px 40px;
 		.topBar {
 			.wordWrapper {
 				.word {
+					font-size: 78px;
+					font-weight: bold;
+					display: inline-block;
+					word-break: break-all;
+					line-height: 1.1em;
 				}
-				.subtitle {
+				.subTitle {
+					display: inline-block;
+					color: lighten(#333,50%);
+					margin: 10px 10px 5px 20px;
+				}
+				a.addNewWord {
+					padding: 3px 6px;
+					font-size: 10px;
+					background: lighten(@baseColor,80%);
+					color: white;
+					transition: background-color 0.1s;
+					&:hover {
+						background: @baseColor;
+						transition: background-color 0.3s;
+					}
+					.text {
+						.icon {
+							padding-right: 6px;
+						}
+					}
 				}
 			}
 		}
-		.titles {
-			.title {
-				span.text {
+		.tabs {
+			margin-top: 30px;
+			.tabpanel {
+				ul.nav {
+					li {
+						a {
+							color: lighten(@baseColor,70%);
+							&:hover {
+								color: @baseColor;
+							}
+						}
+					}
+					li.active {
+						a {
+							color: @baseColor;
+						}
+					}
 				}
-			}
-		}
-		.editContent {
-			input[type="text"] {
-				width: 100%;
+				div.tab-content {
+					margin-top: 20px;
+					div.tab-pane {
+						div.dictContent {
+							.explanationWrapper {
+								ul.explanationList {
+									li.pos {
+										.posContent {
+										}
+										ul.listItems {
+											li.list {
+												.listItem {
+												}
+											}
+										}
+									}
+								}
+								.commonUsage {
+									h4.title {
+									}
+								}
+							}
+							.exampleWrapper {
+								ul.exampleList {
+									li.list {
+										margin-top: 10px;
+										span.text {
+											&.fr {}
+											&.cn {margin-top:  5px;}
+										}
+									}
+								}
+							}
+							.conjugaisonWrapper {
+								.original {
+									.text {
+										&.cn {}
+										&.fr {font-weight: bold;}
+									}
+								}
+								ul.conjugaisonList {
+									margin-top: 20px;
+									-webkit-padding-start: 0;
+									li.list {
+										display: block;
+										background-color: lighten(@baseColor, 95%);
+										padding: 10px 20px;
+										margin-bottom: 10px;
+										a {
+											span.icon {margin-right: 10px}
+											span.text {}
+										}
+									}
+								}
+							}
+						}
+						div.editBtn {
+							margin-top:15px;
+							.edit {
+								padding: 3px 6px;
+								font-size: 10px;
+								background: lighten(@baseColor,80%);
+								color: white;
+								transition: background-color 0.1s;
+								&:hover {
+									background: @baseColor;
+									transition: background-color 0.3s;
+								}
+								.icon {
+									padding-right: 6px;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
