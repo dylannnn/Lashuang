@@ -17,6 +17,12 @@ body {
 		padding: 10px 10px;
 	}
 }
+.btn.active, .btn:active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 
 /*HOME*/
 #home {
@@ -199,6 +205,15 @@ body {
 					font-size: 10px;
 					background-color: lighten(@baseColor,80%);
 					color: darken(white,80%);
+                    span.icon {
+                        padding-right: 6px;
+                    }
+                    transition: all 0.1s;
+                    &:hover {
+                        background-color: @baseColor;
+                        color: white;
+                        transition: all 0.3s;
+                    }
 				}
 			}
             .sidebarText {
@@ -239,11 +254,12 @@ body {
 					padding: 3px 6px;
 					font-size: 10px;
 					background: lighten(@baseColor,80%);
-					color: white;
-					transition: background-color 0.1s;
+					color: darken(white,80%);
+					transition: all 0.1s;
 					&:hover {
 						background: @baseColor;
-						transition: background-color 0.3s;
+                        color: white;
+						transition: all 0.3s;
 					}
 					.text {
 						.icon {
@@ -271,10 +287,10 @@ body {
 						}
 					}
 				}
-				div.tab-content {
+				.tab-content {
 					margin-top: 20px;
-					div.tab-pane {
-						div.dictContent {
+					.tab-pane {
+						.dictContent {
 							.explanationWrapper {
 								ul.explanationList {
 									li.pos {
@@ -320,24 +336,37 @@ body {
 										padding: 10px 20px;
 										margin-bottom: 10px;
 										a {
+                                            &:hover {
+                                                text-decoration: none;
+                                            }
+                                            &:focus {
+                                                text-decoration: none;
+                                                color: #337ab7;
+                                            }
 											span.icon {margin-right: 10px}
 											span.text {}
 										}
 									}
+                                    .content {
+                                        margin-top: 20px;
+                                        margin-bottom: 20px;
+                                        padding: 0 20px;
+                                    }
 								}
 							}
 						}
-						div.editBtn {
+						.editBtn {
 							margin-top:15px;
 							.edit {
 								padding: 3px 6px;
 								font-size: 10px;
 								background: lighten(@baseColor,80%);
-								color: white;
-								transition: background-color 0.1s;
+								color: darken(white,80%);
+								transition: all 0.1s;
 								&:hover {
 									background: @baseColor;
-									transition: background-color 0.3s;
+                                    color: white;
+									transition: all 0.3s;
 								}
 								.icon {
 									padding-right: 6px;
