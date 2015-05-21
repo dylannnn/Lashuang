@@ -16,7 +16,7 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-	<body id="home">
+	<body id="home" ng-app="LaShuang">
 		<div class="container-fluid">
 			<div class="row RespRow" >
 				<section class="RespColsWrapper">
@@ -31,11 +31,16 @@
 							<span class="fromLang">Français</span> - <span class="toLang">Chinois</span>
 						</div>
 						<div class="searchInputWrapper">
-							<form class="searchInput">
+							<form class="searchInput" ng-controller="LaShuangCtrl">
 								<input class="form-control" type="search" name="search" placeholder="Rechercher">
                                 <button class="btn search"><span class="icon fa fa-search"></span></button>
 								<div class="btn upload"><span class="icon fa fa-camera"></span></div>
 								<input type="file" class="btn uploadBtn"/>
+								<div ng-repeat="words in frDict">
+									<ul >
+										<li>{{ words }}</li>
+									</ul>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -43,6 +48,10 @@
 			</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+		<script src="js/vender/angularjs/angular-resource.min.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/searchControl.js"></script>
 	</body>
 </html>
