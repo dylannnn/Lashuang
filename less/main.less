@@ -18,14 +18,32 @@ body {
 	}
 }
 .btn.active, .btn:active {
-  background-image: none;
-  outline: 0;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+	background-image: none;
+	outline: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+ul {
+	margin: 0;
+	-webkit-padding-start: 0;
+}
+a {
+	&:active {
+		text-decoration: none;
+	}
+	&:hover {
+		text-decoration: none;
+	}
+	&:focus {
+		text-decoration: none;
+	}
+	&:visited {
+		text-decoration: none;
+	}
 }
 
-/*HOME*/
-#home {
+/* Identity Wrapper*/
+#identity {
 	.logoWrapper {
 		margin-top: 10%;
 		a.logo {
@@ -46,31 +64,120 @@ body {
 			font-weight: bold;
 		}
 	}
-	.searchInputWrapper {
-		margin-top: 40px;
-		form.searchInput {
+}
+/* Search Wrapper*/
+#searchWrapper {
+	margin-top: 40px;
+	.searchForm {
+		width: 100%;
+		display: block;
+		text-align: center;
+		.searchInput {
 			width: 100%;
-			display: block;
-			text-align: center;
-			input.form-control {
+			margin: 0 auto;
+			display: inline-block;
+			max-width: 260px;
+			.searchIcon {
 				display: inline-block;
-				max-width: 260px;
-				width: 60%
+				position: absolute;
+				margin-left: 13px;
+				margin-top: 6px;
+				.icon {
+					color: lighten(#333,50%);
+					&.focus {
+						color:#333;
+					}
+				}
 			}
-            button.search {
-                vertical-align: top;
-                background-color: @baseColor;
-				color: white;
-            }
-			div.upload {
+			.inputWrapper {
 				display: inline-block;
-				vertical-align: top;
-				background-color: @baseColor;
-				color: white;
+				width: 100%;
+				.input {
+					width: 100%;
+					padding-left: 35px;
+					&.typed {
+						border-bottom-left-radius: 0;
+						border-bottom-right-radius: 0;
+					}
+				}
+				.ajaxResultWrapper {
+					background: #efefef;
+					ul.ajaxResultList {
+						text-align: left;
+						padding: 10px 0;
+						li.ajaxResult {
+							display: block;
+							a.item {
+								color: #333;
+								display: block;
+								.text {
+									display: block;
+									margin:0 20px;
+									padding: 5px 15px;
+								}
+								&:hover {
+									text-decoration: none;
+									background-color: darken(#efefef,10%);
+								}
+							}
+							.loading {
+								margin:0 20px;
+								padding: 5px 15px;
+								&.hide {
+									display: none;
+								}
+							}
+						}
+					}
+				}
 			}
-			input[type="file"] {
-				display: none;
+		}
+		.search {
+			vertical-align: top;
+			background-color: @baseColor;
+			color: white;
+		}
+		.upload {
+			display: inline-block;
+			vertical-align: top;
+			background-color: @baseColor;
+			color: white;
+		}
+		.uploadBar {
+			.uploadProgressBtn {
+				display: inline-block;
+				position: relative;
+				svg {
+					width: 70px;
+					cursor: pointer;
+					
+				}
+				.progressbarText{
+					position: absolute;
+					top: 45%;
+					left: 50%;
+					margin: 0;
+					-webkit-transform: translate(-50%, -50%);
+					transform: translate(-50%, -50%);
+					color: transparent;
+					font-size: 15px;
+					&:before {
+						color: white;
+						content: "\f030";
+						display: inline-block;
+						font: normal normal normal 14px/1 FontAwesome;
+						font-size: inherit;
+						text-rendering: auto;
+						-webkit-font-smoothing: antialiased;
+						-moz-osx-font-smoothing: grayscale;
+						transform: translate(0, 0);
+					}
+				}
 			}
+		}
+		input[type="file"] {
+			display: none;
+			margin: 0 auto;
 		}
 	}
 }
@@ -394,7 +501,30 @@ body {
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
+	.RespRow {
+		padding: 20px;
+	}
+	#identity .logoWrapper {
+		margin-top: 5%;
+	}
 	#dict .leftCol {
 		border-right: none;
+	}
+	#searchWrapper {
+		.searchForm  {
+			.searchInput {
+			margin-bottom: 30px;}
+			.upload {
+				display: none;
+//				margin: 0 auto;
+//				width: 80px;
+//				height: 80px;
+//				border-radius: 50%;
+//				.icon {
+//					font-size: 22px;
+//					padding-top: 20px;
+//				}
+			}
+		}
 	}
 }
