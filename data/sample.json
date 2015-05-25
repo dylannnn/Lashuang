@@ -1,0 +1,18 @@
+{
+  "categories": [
+    {
+      "image": "b-elite_food.jpg",
+      "title": "B-Elite Fuel",
+      "description": "You are elite.  This is your fuel.",
+      "type": "brand",
+      "url": "/store/b-elite.htm"
+    },
+    {
+      "image": "organic_foods.jpg",
+      "title": "Organic Foods",
+      "description": "Make healthy food and snack choices.",
+      "type": "goal",
+      "url": "/store/healthy-snacks.htm"
+    }
+  ]
+}

@@ -1,53 +1,55 @@
-<div class="RespCol">
-	<div id="identity">
-		<div class="logoWrapper">
-			<a ng-href="/" class="logo">
-				<img src="img/logo.svg"/>
-			</a>
-		</div>
-		<div class="tagline">
-			<span class="title">Dictionnaire</span>
-			<span class="fromLang">Français</span> - <span class="toLang">Chinois</span>
-		</div>
-	</div>
-	<div id="searchWrapper" class="searchInputWrapper" ng-controller="searchCtrl">
-		<form class="searchForm">
-			<div class="searchInput">
-				<div class="searchIcon" for="filter-by"><span class="icon fa fa-search"></span></div>
-				<div class="inputWrapper">
-					<input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" ng-enter="checkInputVal()">
-					<div class="ajaxResultWrapper">
-						<ul class="ajaxResultList">
-							<li class="ajaxResult">
-								<a class="item" href=''><span class="text">123</span></a>
-							</li>
-							<li class="ajaxResult">
-								<a class="item" href=''><span class="text">456</span></a>
-							</li>
-							<li class="ajaxResult">
-								<a class="item" href=''><span class="text">789</span></a>
-							</li>
-							<li class="ajaxResult">
-								<span class="loading fa fa-spinner fa-pulse"></span>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<a href="#" id="filter-clear" class="fa fa-times hide"></a>
-			</div>
-			<div class="btn upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
-			<div class="uploadBar">
-				<div class="uploadProgressBtn" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
-			</div>
-			
-
-			
-			<input type="file" class="btn uploadBtn"/>
-			<div ng-repeat="(key, data) in frDict" style="display:none;">
-				<ul >
-					<li ng-animate="'animate'">{{ key }} {{data}} </li>
-				</ul>
-			</div>
-		</form>
-	</div>
-</div>
+<section class="RespColsWrapper home">
+    <div class="RespCol">
+        <div id="identity">
+            <div class="logoWrapper">
+                <a ng-href="/" class="logo">
+                    <img src="img/logo.svg"/>
+                </a>
+            </div>
+            <div class="tagline">
+                <span class="title">Dictionnaire</span>
+                <span class="fromLang">Français</span> - <span class="toLang">Chinois</span>
+            </div>
+        </div>
+        <div id="searchWrapper" class="searchInputWrapper" ng-controller="searchCtrl">
+            <form class="searchForm">
+                <div class="searchInput">
+                    <div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
+                    <div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
+                    <div class="inputWrapper">
+                        <input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" ng-enter="checkInputVal()">
+                        <div class="ajaxResultWrapper">
+                            <ul class="ajaxResultList">
+                                <li class="ajaxResult">
+                                    <a class="item" href=''><span class="text">123</span></a>
+                                </li>
+                                <li class="ajaxResult">
+                                    <a class="item" href=''><span class="text">456</span></a>
+                                </li>
+                                <li class="ajaxResult">
+                                    <a class="item" href=''><span class="text">789</span></a>
+                                </li>
+                                <li class="ajaxResult loading hide">
+                                    <span class="fa fa-spinner fa-pulse"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
+                <div class="uploadBar">
+                    <div class="uploadProgressBtn upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
+                </div>
+                <input type="file" class="btn uploadBtn"/>
+                <div ng-repeat="wor in word" style="">
+                    <ul ng-repeat="(key, data) in wor">
+                        <li>Key is {{ key }} </li>
+                        <ul ng-repeat="wo in wor(key).word" >
+                        {{wo}}
+                        </ul>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
