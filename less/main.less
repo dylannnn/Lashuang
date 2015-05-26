@@ -1,4 +1,4 @@
-// out: ../css/main.min.css, compress: true, strictMath: true
+// out: ../css/main.min.css, compress: false, strictMath: true
 @baseColor: black;
 
 body {
@@ -27,7 +27,7 @@ body {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
-ul {
+ul, ol {
 	margin: 0;
 	-webkit-padding-start: 0;
 }
@@ -47,6 +47,22 @@ a {
 }
 .noneDisplay {
     display: none;
+}
+/* Style the scroll bar for the webkit browsers*/
+::-webkit-scrollbar
+{
+  width: 2px;  /* for vertical scrollbars */
+  height: 2px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.4);
 }
 
 /* Identity Wrapper*/
@@ -476,53 +492,67 @@ a {
             margin-top: 20px;
             .tab-pane {
                 .dictContent {
+					/*Global UL > LI Style*/
+					ul.listItems {
+						margin-left: 50px;
+						li.list {
+							margin: 3px 0;
+							list-style: disc;
+							.listItem {
+								&.fr, &.cn { display: block;}
+							}
+						}
+					}
+					ol.listItems {
+						margin-left: 50px;
+						li.list {
+							margin: 3px 0;
+							.listItem {
+								&.fr, &.cn { 
+									display: block;
+									margin-top: 3px;
+								}
+							}
+						}
+					}
+					/*END*/
                     .explanationWrapper {
-                        ul.explanationList {
-                            li.pos {
-                                .posContent {
-                                }
-                                ul.listItems {
-                                    li.list {
-                                        .listItem {
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        .commonUsage {
-                            h4.title {
-                            }
+                        .explanationList {
+							&.listItems {
+								margin: 0;
+								
+							}
+							.pos {
+								list-style: none;
+							}
                         }
                     }
+					.commonUsage {
+						margin-top: 25px; 
+						h4.title {
+						}
+						.contents {
+						}
+					}
                     .exampleWrapper {
-                        ul.exampleList {
-                            li.list {
-                                margin-top: 10px;
-                                span.text {
-                                    &.fr {}
-                                    &.cn {margin-top:  5px;}
-                                }
-                            }
-                        }
                     }
                     .conjugaisonWrapper {
                         .original {
-                            .text {
-                                &.cn {}
-                                &.fr {font-weight: bold;}
-                            }
+                            
                         }
-                        ul.conjugaisonList {
+                        .conjugaisonList {
                             margin-top: 20px;
                             -webkit-padding-start: 0;
-                            li.list {
-                                display: block;
-                                background-color: lighten(@baseColor, 95%);
-                                padding: 10px 20px;
+                            .list {
+                                display: inherit;
                                 margin-bottom: 10px;
                                 a {
+									padding: 10px 20px;
+									display: block;
+									background-color: lighten(@baseColor, 95%);
                                     &:hover {
                                         text-decoration: none;
+										background-color: darken(lighten(@baseColor, 95%), 5%);
                                     }
                                     &:focus {
                                         text-decoration: none;
@@ -540,26 +570,26 @@ a {
                         }
                     }
                 }
-                .editBtn {
-                    margin-top:15px;
-                    .edit {
-                        padding: 3px 6px;
-                        font-size: 10px;
-                        background: lighten(@baseColor,80%);
-                        color: darken(white,80%);
-                        transition: all 0.1s;
-                        &:hover {
-                            background: @baseColor;
-                            color: white;
-                            transition: all 0.3s;
-                        }
-                        .icon {
-                            padding-right: 6px;
-                        }
-                    }
-                }
             }
         }
+		.editBtn {
+			margin-top:25px;
+			.edit {
+				padding: 3px 6px;
+				font-size: 10px;
+				background: lighten(@baseColor,80%);
+				color: darken(white,80%);
+				transition: all 0.1s;
+				&:hover {
+					background: @baseColor;
+					color: white;
+					transition: all 0.3s;
+				}
+				.icon {
+					padding-right: 6px;
+				}
+			}
+		}
     }
 }
 
@@ -585,34 +615,40 @@ a {
     .innerContent {
         overflow: hidden;
         .tabs {
-            margin: 20px;
+            margin: 44px 0 60px 44px;
             height: 420px;
-            overflow: scroll;
+            overflow: overlay;
+			&.moz {
+				overflow: auto;
+			}
             .tabpanel {
+				margin-right: 40px;
                 .title {
                 }
                 .word {
                     background-color:   lightgray;
                     position: relative;
+					border-left: 5px solid gray;
+					border-right: 1px solid gray;
                     input {
                         padding: 3px 20px;
                         &:focus {
                             outline: -webkit-focus-ring-color auto 0px;
-                            border-left: 5px solid black;
                         }
                         background-color: transparent;
                         border: none;
-                        border-left: 5px solid gray;
                         border-right: 1px solid gray;
                         font-size: 60px;
-                        width: 100%;
-                        max-width: 600px;
+                        width: 89%;
                         font-weight: bold;
                     }
                     span.icon {
                         font-size: 30px;
-                          height: 90px;  position: absolute;  margin-top: 33px;
-  margin-left: 20px;
+                        height: 90px;
+						position: absolute;
+						margin-top: 33px;
+						margin-left: 21px;
+						cursor: pointer;
                     }
                 }
                 ul.nav {
@@ -620,10 +656,56 @@ a {
                     li[role="presentation"] {
                         a {
                             padding: 5px 10px;
-                            font-size: 14px;
+                            font-size: 13px;
                         }
                     }
                 }
+				.tab-content {
+					margin-top: 20px;
+					.tab-pane {
+						.dictContent {
+							.explanationWrapper {
+								.addModule{
+									background-color: #efefef;
+									a.add { 
+										background-color: #3498DB;
+										border-radius: 0;
+										color: white;
+									}
+									.exp {
+										display: inline-block;
+										margin-left: 15px;
+										vertical-align: middle;
+										div {
+											display: inline-block;
+										}
+										select, input {
+											padding-left: 10px;
+											//background-color: transparent;
+										}
+									}
+									a.submit {
+										background-color: #2ECC71;
+										border-radius: 0;
+										color: white;
+										width: 18%;
+										max-width: 99px;
+									}
+								}
+									ul.explanationList {}
+									.commonUsage {
+								}
+							}
+							.exampleWrapper {
+								.addModule {}
+								ul.exampleList {}
+								
+							}
+							.conjugaisonWrapper {
+							}
+						}
+					}
+				}
             }
         }
         .funcBtn  {
@@ -728,13 +810,58 @@ a {
 }
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
-    
+	#addNewWord {
+		.innerContent {
+			.tabs {
+				margin-left: 25px;
+				.tabpanel {
+					h1 {
+						margin-top: 0;
+					}
+					.word {
+						span.icon {
+							margin-left: 4%;
+							margin-top: 20px;
+							font-size: 24px;
+						}
+						input {
+							font-size: 40px;
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	#dict .leftCol {
 		border-right: none;
 	}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
+	
+	#addNewWord {
+		.innerContent {
+			.tabs {
+				.tabpanel {
+					h1 {
+						font-size: 22px;
+					}
+					.word {
+						span.icon {
+							margin-left: 8px;
+							margin-top: 14px;
+							font-size: 20px;
+						}
+						input {
+							font-size: 28px;
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	.RespRow {
 		padding: 20px;
 	}

@@ -19,6 +19,28 @@ app.controller('pageLoad',function ($scope) {
 					return false
 			}
 		},
+		getBrowser : function () {
+			//return  navigator ? navigator.userAgent.toLowerCase() : "other";
+			if(navigator.userAgent.indexOf("Chrome") != -1 ) {
+				return 'Chrome';
+			}
+			else if(navigator.userAgent.indexOf("Opera") != -1 ) {
+				return 'Opera';
+			}
+			else if(navigator.userAgent.indexOf("Firefox") != -1 ) {
+				return'Firefox';
+			}
+			else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {
+				return 'IE'; 
+			}  
+			else {
+				return'unknown';
+			}
+			//
+		},
+		addClassTo : function (claName) {
+			$(claName).addClass('moz');
+		}, 
 		progressBtn : function () {
 			var progressBar = new ProgressBar.Circle('.uploadProgressBtn', {
 				strokeWidth: 5,
@@ -67,7 +89,7 @@ app.controller('pageLoad',function ($scope) {
                 closeOnContentClick: false,
                 mainClass: 'laPop mfp-fade',
                 removalDelay: 300,
-                
+				fixedBgPos: true
             });
         },
 		pageload : function () {
@@ -158,6 +180,13 @@ app.controller("liveSearch", function($scope, $http, $q, $window) {
 
         return defer.promise;
     };
+});
+
+app.controller("OpenPopup", function ($scope) {
+	if ($scope.scriptHandler.getBrowser() == "Firefox") {
+		$scope.scriptHandler.addClassTo('.browser');
+		$('.browser').mCustomScrollbar();//Shows erron on firefox but IT works, need to change the speed of the scroll
+	}
 });
 
 app.directive('ngEnter', function () {
