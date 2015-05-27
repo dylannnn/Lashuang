@@ -18,8 +18,8 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 	</head>
-	<body id="home" ng-app="LaShuang" ng-controller="pageLoad">
-		<div class="container-fluid" ng-include="scriptHandler.getInclude()">
+	<body id="home" ng-app="LaShuang" ng-controller="switchTemplate">
+		<div class="container-fluid" ng-include="switcher.getInclude()">
 		</div>
 		<div id="popup" class="popupWrapper">
             <div id="addNewWord" class="addNewWordWrapper noneDisplay">
@@ -41,5 +41,7 @@
         <!--My JS-->
 		<script src="js/main.js"></script>
 		<script src="js/mainCtrl.js"></script>
+        
+        <script src="js/uploader.js"></script>
 	</body>
 </html>
