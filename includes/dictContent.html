@@ -1,0 +1,328 @@
+<div class="row RespRow">
+	<section id="dict" class="RespColsWrapper dict">
+		<div class="RespCol col-lg-3 col-md-3 col-sm-12 col-xs-12 leftCol" >
+			<div class="logoWrapper">
+				<a href="/" class="logo">
+					<img src="img/logo.png"/>
+				</a>
+			</div>
+			<div class="tagline">
+				<span class="title">Dictionnaire</span>
+				<span>Français</span> - <span>Chinois</span>
+			</div>
+			<div id="searchWrapper" class="searchInputWrapper" ng-controller="searchCtrl">
+				<form class="searchForm">
+					<div class="searchInput small">
+						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
+						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
+						<div class="inputWrapper">
+							<input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" ng-enter="checkInputVal()">
+							<div class="ajaxResultWrapper">
+								<ul class="ajaxResultList">
+									<li class="ajaxResult">
+										<a class="item" href=''><span class="text">123</span></a>
+									</li>
+									<li class="ajaxResult">
+										<a class="item" href=''><span class="text">456</span></a>
+									</li>
+									<li class="ajaxResult">
+										<a class="item" href=''><span class="text">789</span></a>
+									</li>
+									<li class="ajaxResult loading hide">
+										<span class="fa fa-spinner fa-pulse"></span>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
+					<div class="uploadBar">
+						<div class="uploadProgressBtn uploadMobile" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
+					</div>
+					<input type="file" class="btn uploadBtn"/>
+					<div ng-repeat="wor in word" style="">
+						<ul ng-repeat="(key, data) in wor">
+							<li>Key is {{ key }} </li>
+							<ul ng-repeat="wo in wor(key).word" >
+							{{wo}}
+							</ul>
+						</ul>
+					</div>
+				</form>
+
+				<form class="searchInput hide">
+					<input class="form-control" type="search" name="search" placeholder="Rechercher" data-toggle="tooltip" data-placement="top" title="Search Lashuang Dictionary">
+					<div class="btn upload" data-toggle="tooltip" data-placement="top" title="Upload an image to recorgnize the text."><span class="icon fa fa-camera"></span></div>
+					<input type="file" class="btn uploadBtn"/>
+				</form>
+			</div>
+			<div class="uploadedImage">
+				<div class="imgWrapper">
+					<img src="img/temp/demo_upload.jpg" class="img">
+				</div>
+				<div class="uploadedImageInfo">
+					<div class="imageName">Image name:<span class="imageName name">demo_upload.jpg</span></div>
+				</div>
+				<div class="reUploadBtn">
+					<a href="" class="btn reUpload" data-toggle="tooltip" data-placement="top" title="Reupload a new image to start search"><span class="icon fa fa-upload"></span>Rajouter</a>
+				</div>
+			</div>
+			<div class="catalogueWrapper">
+				<h3 class="title">Catalogue:</h3>
+				<div class="catalogueContent">
+					<ul class="wordList">
+						<li class="word">
+							<a href="#"><span class="text">aiole</span></a>
+						</li>
+						<li class="word">
+							<a href="#"><span class="text">oiole</span></a>
+						</li>
+						<li class="word active">
+							<a href="#"><span class="text">aide</span></a>
+						</li>
+						<li class="word">
+							<a href="#"><span class="text">eiole</span></a>
+						</li>
+						<li class="word">
+							<a href="#"><span class="text">eide</span></a>
+						</li>
+						<li class="word">
+							<a href="#"><span class="text">piole</span></a>
+						</li>
+					</ul>
+					<div class="more">
+						<a href="#" class="btn moreBtn"><span class="icon fa fa-ellipsis-v"></span><span class="text">Charger plus</span></a>
+					</div>
+					<div class="sidebarText">vous pouvais créer des nouveaux ici.</div>
+					<a href="" class="btn addNewWord" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image."><span class="text"><i class="icon fa fa-plus"></i>Ajouter</span></a>
+				</div>
+			</div>
+		</div>
+		<!--Left Col-->
+
+		<div class="RespCol col-lg-9 col-md-9 col-sm-12 col-xs-12 rightCol" >
+			<div class="wordInterpretation">
+				<div class="topBar">
+					<div class="wordWrapper">
+						<div class="word">aide</div>
+						<div class="wordNotExist">
+							<div class="subTitle">n'existe pas, vous pouvez le créer ici.</div>
+							<div class="btnWrapper">
+								<a href="#addNewWord" class="btn addNewWord popup" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image.">
+									<span class="text"><i class="icon fa fa-plus"></i>Ajouter</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tabs">
+					<div class="tabpanel" role="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#dictionaire" aria-controls="home" role="tab" data-toggle="tab">Dictionaire</a></li>
+							<li role="presentation"><a href="#exemple" aria-controls="profile" role="tab" data-toggle="tab">Exemple(s)</a></li>
+							<li role="presentation"><a href="#conjugaison" aria-controls="messages" role="tab" data-toggle="tab">Conjugaison</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="dictionaire">
+								<div class="dictContent">
+									<div class="explanationWrapper">
+										<ul class="listItems explanationList">
+											<li class="list pos">
+												<div class="posContent">n. f</div>
+												<ul class="listItems subul">
+													<li class="list">
+														<span class="listItem">帮助， 援助； 支持， 依靠</span>
+													</li>
+													<li class="list">
+														<span class="listItem">救济</span>
+													</li>
+													<li class="list">
+														<span class="listItem">pl. （法国君主统治时代）间接税</span>
+													</li>
+													<li class="list">
+														<span class="listItem">pl. 驱马方式[指拉缰、踢马刺、吆喝等]</span>
+													</li>
+													<li class="list">
+														<span class="listItem">à l'~de依靠, 借助, 使用</span>
+													</li>
+												</ul>
+											</li>
+											<li class="list pos">
+												<div class="posContent">n.</div>
+												<ul class="listItems">
+													<li class="list">
+														<span class="listItem">(后面常有作同位语用或由连字符连接的词加以说明)助手, 助理, 副手, 帮手; </span>
+													</li>
+													<li class="list">
+														<span class="listItem">~ de camp (随从)副官; 侍从武官</span>
+													</li>
+												</ul>
+											</li>
+											<li class="list pos">
+												<div class="posContent">prép.</div>
+												<ul class="listItems">
+													<li class="list">
+														<span class="listItem">[短语]使用， 借助， 依靠, 在…帮助下</span>
+													</li>
+													<li class="list">
+														<span class="listItem">avec l'~de</span>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="commonUsage">
+										<h4 class="title">常见用法</h4>
+										<div class="contents">
+											<ol class="listItems">
+												<li class="list">
+													<span class="listItem fr">recevoir des aides de l'État</span>
+													<span class="listItem cn">得到国家的救助</span>
+												</li>
+												<li class="list">
+													<span class="listItem fr">aide au développement</span>
+													<span class="listItem cn">援助发展</span>
+												</li>
+												<li class="list">
+													<span class="listItem fr">aide à l'emploi</span>
+													<span class="listItem cn">就业救济</span>
+												</li>
+												<li class="list">
+													<span class="listItem fr">aide humanitaire</span>
+													<span class="listItem cn">人道主义援助</span>
+												</li>
+												<li class="list">
+													<span class="listItem fr">aide ménagère</span>
+													<span class="listItem cn">家务助理女工</span>
+												</li>
+												<li class="list">
+													<span class="listItem fr">aide à domicile</span>
+													<span class="listItem cn">家政服务</span>
+												</li>
+											</ol>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="exemple">
+								<div class="dictContent">
+									<div class="exampleWrapper">
+										<h4 class="title">例句</h4>
+										<ol class="listItems exampleList">
+											<li class="list">
+												<span class="listItem fr">Il refuse fermement son aide.</span>
+												<span class="listItem cn">他坚定地拒绝了他的帮助。</span>
+											</li>
+											<li class="list">
+												<span class="listItem fr">Le malade a repris connaissance à son aide.</span>
+												<span class="listItem cn">在她的帮助下，病人恢复知觉了。</span>
+											</li>
+											<li class="list">
+												<span class="listItem fr">Il reçoit des aides de l'État.</span>
+												<span class="listItem cn">他得到了国家的救助。</span>
+											</li>
+											<li class="list">
+												<span class="listItem fr">Je vous remercie pour vos aides.</span>
+												<span class="listItem cn">感谢大家的帮助。</span>
+											</li>
+											<li class="list">
+												<span class="listItem fr">Il accorde une aide à son amie.</span>
+												<span class="listItem cn">他对朋友给予帮助。</span>
+											</li>
+										</ol>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="conjugaison">
+								<div class="dictContent">
+									<div class="conjugaisonWrapper">
+										<div class="original">
+											<span class="text cn">动词原型：</span><span class="text fr">aider</span>
+										</div>
+										<ul class="conjugaisonList">
+											<li class="list">
+												<a href="#conjuMethod" data-toggle="collapse" aria-expanded="false" aria-controls="conjuMethod">
+													<span class="icon fa fa-caret-down"></span><span class="text">变位方法</span>
+												</a>
+											</li>
+											<div class="collapse content" id="conjuMethod">
+												直陈式 现在时 (Indicatif Présent)
+												j'aide
+												Tu aides
+												Il aide
+												Nous aidons
+												Vous aidez
+												Ils aident
+											</div>
+											<li class="list">
+												<a href="#conjuIntro" data-toggle="collapse" aria-expanded="false" aria-controls="conjuIntro">
+													<span class="icon fa fa-caret-down"></span><span class="text">变位说明</span>
+												</a>
+											</li>
+											<div class="collapse content" id="conjuIntro">
+												第1组动词
+												可用作：可作为及物动词(Verb Transitif)
+												可作为代动词(Verb Pronominal) 
+												注意：当该动词作为代动词与se连用时，需要使用être作为助动词，其变位方法会与上述有所不同;
+											</div>
+											<li class="list">
+												<a href="#conjuTips" data-toggle="collapse" aria-expanded="false" aria-controls="conjuTips">
+													<span class="icon fa fa-caret-down"></span><span class="text">变位提示</span>
+												</a>
+											</li>
+											<div class="collapse content" id="conjuTips">
+												变位提示：
+
+												现在时 Indicatif Présent
+
+												变位方法：
+
+												第一组动词(通常为-er)：参见 aimer
+												注意一些第一组动词由于发音需要，在变位时会有所变化：
+
+												以-eler, -eter结尾的第一组动词，如appeler, jeter ,在单数所有人称，以及复数第三人称的变位中，词尾字母变为"ll","tt"。
+												以-cer, -ger结尾的第一组动词，如commencer, manger, 在复数第一人称时词尾应改为 -çons, -geons 。
+												以-ayer,-oyer,-uyer结尾的第一组动词，如essayer, envoyer, ennuyer, 在单数所有人称，以及复数第三人称的变位中，词尾字母由y变为i。
+												第二组动词 (通常为 -ir)：参见 finir
+
+												例外：sortir, courir, ouvrir, servir, partir, dormir　等
+												第三组动词：不规则变化。
+
+												动词提示：
+
+												标准以 « －er »结尾的第一组动词变位
+												Voici la forme générale de conjugaison des verbes en -er
+
+												类似变位的动词:
+												abaisser
+												abandonner
+												abat-carrer
+												abdiquer
+												aberrer
+												abhorrer
+												abîmer
+												abjurer
+												abloquer
+												abominer
+												...
+												类似动词过多，仅列出前十个。
+											</div>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="editBtn">
+							<div class="btn edit">
+								<span class="icon fa fa-pencil"></span>Éditer
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--Right Col-->
+	</section>
+</div>

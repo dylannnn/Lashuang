@@ -1,6 +1,8 @@
-// out: ../css/main.min.css, compress: false, strictMath: true
+// out: ../css/main.min.css, compress: true, strictMath: true
 @baseColor: black;
-
+.transition (@elm: all; @duration: 0.3s ) {
+	transition: @arguments;
+}
 body {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -205,7 +207,7 @@ a {
 			.inputWrapper {
 				display: inline-block;
 				width: 100%;
-                position: relative;
+                //position: relative;
 				.input {
 					width: 100%;
 					padding-left: 35px;
@@ -494,7 +496,7 @@ a {
                 .dictContent {
 					/*Global UL > LI Style*/
 					ul.listItems {
-						margin-left: 50px;
+						margin-left: 40px;
 						li.list {
 							margin: 3px 0;
 							list-style: disc;
@@ -504,7 +506,7 @@ a {
 						}
 					}
 					ol.listItems {
-						margin-left: 50px;
+						margin-left: 40px;
 						li.list {
 							margin: 3px 0;
 							.listItem {
@@ -620,6 +622,29 @@ a {
             overflow: overlay;
 			&.moz {
 				overflow: auto;
+				.tabpanel {
+					margin-right: 9px;
+					.tab-content {
+						.tab-pane {
+							.dictContent {
+								.explanationWrapper {
+									.addModule {
+										.exp {
+											margin-left: 5px;
+											margin-right: 5px;
+											.text {
+												&.sel {
+												}
+												&.addExp {
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 			}
             .tabpanel {
 				margin-right: 40px;
@@ -661,47 +686,91 @@ a {
                     }
                 }
 				.tab-content {
+					/*Add Module Style*/
+					.addModule {
+						background-color: #efefef;
+						a.add { 
+							background-color: #3498DB;
+							border-radius: 0;
+							color: white;
+						}
+						.template {
+							display: inline-block;
+							vertical-align: middle;
+							margin-left: 5px;
+							margin-right: 5px;
+							div {
+								display: inline-block;
+								&.text {
+									margin-right: 5px;
+								}
+							}
+							input {
+								padding: 0 8px;
+								max-width: 160px;
+								width: 100%;
+							}
+							&.exp {
+								.text {
+									&.sel {
+									}
+									&.addExp {
+										margin-left: 8px;
+									}
+								}
+							}
+							&.comusage {
+							
+							}
+						}
+						a.submit {
+							background-color: #2ECC71;
+							border-radius: 0;
+							color: white;
+							width: 18%;
+							min-width: 40px;
+							max-width: 65px;
+							float: right;
+						}
+					}
+					/*END*/
 					margin-top: 20px;
 					.tab-pane {
 						.dictContent {
+							/*Global ul style*/
+							ul {
+								margin: 20px 40px;
+							}
+							.newContent {
+								margin: 20px 40px;
+							}
 							.explanationWrapper {
-								.addModule{
-									background-color: #efefef;
-									a.add { 
-										background-color: #3498DB;
-										border-radius: 0;
-										color: white;
-									}
-									.exp {
-										display: inline-block;
-										margin-left: 15px;
-										vertical-align: middle;
-										div {
-											display: inline-block;
-										}
-										select, input {
-											padding-left: 10px;
-											//background-color: transparent;
-										}
-									}
-									a.submit {
-										background-color: #2ECC71;
-										border-radius: 0;
-										color: white;
-										width: 18%;
-										max-width: 99px;
+								ul.explanationList {
+									margin: 0;
+									ul {
+										margin: 0 40px;
 									}
 								}
-									ul.explanationList {}
-									.commonUsage {
+								.commonUsage {
+									.tetle {
+									}
+									.contents {
+										ul {
+											margin: 0 40px;
+										}
+									}
 								}
 							}
 							.exampleWrapper {
 								.addModule {}
-								ul.exampleList {}
+								ul.exampleList {
 								
+								}
 							}
 							.conjugaisonWrapper {
+								ul.conjugaisonList {
+									margin: 20px 0 0;
+								}
 							}
 						}
 					}
@@ -720,15 +789,19 @@ a {
                 &.save {
                     background-color: #00BF9D;
                     margin-left: 20px;
+					.transition (background-color);
                     &:hover {
-                        background-color: darken(#00BF9D,20%);
+                        background-color: darken(#00BF9D,8%);
+						.transition (background-color);
                     }
                 }
                 &.cancel {
                     background-color: #EB4C37;
                     margin-left: 30px;
+					.transition (background-color);
                     &:hover {
-                        background-color: darken(#EB4C37,20%);
+                        background-color: darken(#EB4C37,8%);
+						.transition (background-color);
                     }
                 }
             }
@@ -792,9 +865,6 @@ a {
 .mfp-with-zoom.mfp-removing.mfp-bg {
   opacity: 0;
 }
-
-
-
 
 
 
@@ -876,14 +946,6 @@ a {
             .searchInput {}
 			.upload {
 				display: none;
-//				margin: 0 auto;
-//				width: 80px;
-//				height: 80px;
-//				border-radius: 50%;
-//				.icon {
-//					font-size: 22px;
-//					padding-top: 20px;
-//				}
 			}
 		}
 	}
