@@ -10,62 +10,54 @@
 				<span class="title">Dictionnaire</span>
 				<span>Français</span> - <span>Chinois</span>
 			</div>
-			<div id="searchWrapper" class="searchInputWrapper" ng-controller="searchCtrl">
-				<form class="searchForm">
+			<div id="searchWrapper" class="searchInputWrapper">   
+                <div class="uploadedImage" ng-controller="showUploadInfo">
+                    <div class="imgWrapper">
+                        <img class="img" ngf-src="file" ngf-accept="'image/*'">
+                    </div>
+                    <div class="uploadedImageInfo">
+                        <div class="imageName">Image name:<span class="imageName name"></span></div>
+                    </div>
+                    <div class="reUploadBtn hide">
+                        <a href="" class="btn reUpload" data-toggle="tooltip" data-placement="top" title="Reupload a new image to start search"><span class="icon fa fa-upload"></span>Rajouter</a>
+                    </div>
+                </div>
+                
+				<form class="searchForm" ng-controller="MyCtrl1">
 					<div class="searchInput small">
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
 						<div class="inputWrapper">
-							<input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" ng-enter="checkInputVal()">
-							<div class="ajaxResultWrapper">
+							<input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1">
+							<div class="ajaxResultWrapper hide">
 								<ul class="ajaxResultList">
-									<li class="ajaxResult">
+									<li class="ajaxResult hide">
 										<a class="item" href=''><span class="text">123</span></a>
 									</li>
-									<li class="ajaxResult">
-										<a class="item" href=''><span class="text">456</span></a>
-									</li>
-									<li class="ajaxResult">
-										<a class="item" href=''><span class="text">789</span></a>
-									</li>
-									<li class="ajaxResult loading hide">
+									<li class="ajaxResult loading">
 										<span class="fa fa-spinner fa-pulse"></span>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<div class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
+					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start">
+                        <span class="icon fa fa-camera"></span>
+                    </div>
+                    <div class="dragDropZone hide">
+						<div ngf-drop ng-model="files" class="drop-box" 
+							 ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true"
+							 ngf-accept="'image/*'"  ngf-hide-on-drop-not-available="true">
+							<span class="text">Drop Image here</span>
+						</div>
+						<div class="noDrag" ngf-no-file-drop>
+							<span class="text">File Drag/Drop is not supported for this browser</span>
+						</div>
+					</div>
 					<div class="uploadBar">
-						<div class="uploadProgressBtn uploadMobile" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
-					</div>
-					<input type="file" class="btn uploadBtn"/>
-					<div ng-repeat="wor in word" style="">
-						<ul ng-repeat="(key, data) in wor">
-							<li>Key is {{ key }} </li>
-							<ul ng-repeat="wo in wor(key).word" >
-							{{wo}}
-							</ul>
-						</ul>
+						<div ngf-select ng-model="files" class="uploadProgressBtn uploadMobile" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
 					</div>
 				</form>
-
-				<form class="searchInput hide">
-					<input class="form-control" type="search" name="search" placeholder="Rechercher" data-toggle="tooltip" data-placement="top" title="Search Lashuang Dictionary">
-					<div class="btn upload" data-toggle="tooltip" data-placement="top" title="Upload an image to recorgnize the text."><span class="icon fa fa-camera"></span></div>
-					<input type="file" class="btn uploadBtn"/>
-				</form>
-			</div>
-			<div class="uploadedImage">
-				<div class="imgWrapper">
-					<img src="img/temp/demo_upload.jpg" class="img">
-				</div>
-				<div class="uploadedImageInfo">
-					<div class="imageName">Image name:<span class="imageName name">demo_upload.jpg</span></div>
-				</div>
-				<div class="reUploadBtn">
-					<a href="" class="btn reUpload" data-toggle="tooltip" data-placement="top" title="Reupload a new image to start search"><span class="icon fa fa-upload"></span>Rajouter</a>
-				</div>
 			</div>
 			<div class="catalogueWrapper">
 				<h3 class="title">Catalogue:</h3>

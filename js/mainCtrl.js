@@ -3,9 +3,13 @@ var app = angular.module('LaShuang', ['ngFileUpload']);
 app.service('globalData', function () {
 	var _searchable = false;
 	var _incPop = false;
+    var _uploadedImageName = '';
+    var _uploadedImage = {};
+    
 	this.searchable = _searchable;
 	this.incPop = _incPop;
-	
+    this.uploadedImageName = _uploadedImageName;
+	this.uploadedImage = _uploadedImage;
 });
 
 // #1 Scope => controller = switchTemplate
@@ -201,9 +205,51 @@ app.controller('pageLoad', function ($scope, $http) {
 
 
 app.controller('MyCtrl', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
-	var switechable = globalData.searchable;
-	
-	console.log(switechable);
+    
+    $('.img').hide();
+    $scope.$watch('files', function () {
+        $scope.upload($scope.files);
+    });
+    
+    $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                globalData.uploadedImage = file;
+    console.log("Images is " +  globalData.uploadedImage);
+                Upload.upload({
+                    url: '../includes/uploader.php',
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name + " Data is " + data);
+                    //$('.img').show();
+					globalData.searchable = true;
+                    globalData.uploadedImageName = config.file.name;
+                    console.log("globalData.uploadedImageName is " +  globalData.uploadedImageName );
+					
+                });
+            }
+        }
+    };
+}]);
+
+
+
+app.controller('showUploadInfo', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
+    $scope.fileNamed = globalData.uploadedImageName;
+    console.log("$scope.files is " + $scope.fileNamed);
+    $scope.file = globalData.uploadedImage;
+    console.log("$scope.file is " + $scope.file);
+    $('.img').show();
+    $('.name').append($scope.fileNamed);
+    
+}]);
+
+app.controller('MyCtrl1', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
+    
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -213,17 +259,19 @@ app.controller('MyCtrl', ['$scope', 'Upload', 'globalData', function ($scope, Up
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
                 Upload.upload({
-                    url: '../LASHUANG/includes/uploader.php',
+                    url: '../includes/uploader.php',
                     file: file
                 }).progress(function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                 }).success(function (data, status, headers, config) {
                     console.log('file ' + config.file.name );
-					
+                    $('.img').show();
+					globalData.searchable = true;
 					
                 });
             }
         }
     };
+    
 }]);

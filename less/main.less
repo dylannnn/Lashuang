@@ -185,7 +185,7 @@ a {
                 .inputWrapper {
                     .ajaxResultWrapper {
                         width: 100%;
-                        position: absolute;
+                        position: relative;
                     }
                 }
             }
@@ -258,6 +258,15 @@ a {
                 background-color: @baseColor;
             }
 		}
+        .uploadedImage {
+            width: 100%;
+			max-width: 306px;
+			margin: 0 auto;
+			margin-top: 20px;
+            .img {
+                width: 100%;
+            }
+        }
 		.dragDropZone {
 			width: 100%;
 			max-width: 306px;
@@ -272,6 +281,7 @@ a {
 					margin-top: 15%;
 					font-size: 20px;
 					color: rgb(152, 152, 152);
+                    font-weight: 100;
 				}
 				&.dragover {
 					border-color: #e74c3c;
@@ -291,6 +301,7 @@ a {
 					font-size: 20px;
 					color: rgb(152, 152, 152);
 					padding: 0 20px;
+                    font-weight: 100;
 				}
 			}
 		}
@@ -945,7 +956,11 @@ a {
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
-	
+    .hide-on-small {display:none;}
+    #dict .uploadedImage .uploadedImageInfo .imageName {
+        text-align: center;
+    }
+    #dict .wordInterpretation {margin:40px 0;}
 	#addNewWord {
 		.innerContent {
 			.tabs {

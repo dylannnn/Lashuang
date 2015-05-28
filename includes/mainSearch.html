@@ -13,37 +13,42 @@
 				</div>
 			</div>
 			<div id="searchWrapper" class="searchInputWrapper">
-				<form class="searchForm">
+				<form class="searchForm" ng-controller="MyCtrl">
 					<div class="searchInput">
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
 						<div class="inputWrapper">
-							<input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" ng-enter="checkInputVal()">
+							<input id="filter-by" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1">
 							<div class="ajaxResultWrapper">
 								<ul class="ajaxResultList">
-									<li class="ajaxResult">
+									<li class="ajaxResult hide">
 										<a class="item" href=''><span class="text">123</span></a>
 									</li>
-									<li class="ajaxResult loading hide">
+									<li class="ajaxResult loading">
 										<span class="fa fa-spinner fa-pulse"></span>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<div ng-controller="MyCtrl" ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
-					<div class="dragDropZone" ng-controller="MyCtrl">
-						<div ngf-drop ng-model="files" class="drop-box" 
-							 ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true"
-							 ngf-accept="'image/*'"  ngf-hide-on-drop-not-available="true">
-							<span class="text">Drop Image here</span>
-						</div>
-						<div class="noDrag" ngf-no-file-drop>
-							<span class="text">File Drag/Drop is not supported for this browser</span>
-						</div>
-					</div>
+					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start">
+                        <span class="icon fa fa-camera"></span>
+                    </div>
+                    <div class="uploadedImage">
+                        <img class="img" ngf-src="files[0]" ngf-accept="'image/*'">
+                    </div>
+                    <div class="dragDropZone hide-on-small" >
+                        <div ngf-drop ng-model="files" class="drop-box" 
+                             ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true"
+                             ngf-accept="'image/*'"  ngf-hide-on-drop-not-available="true">
+                            <span class="text">Drop Image here</span>
+                        </div>
+                        <div class="noDrag" ngf-no-file-drop>
+                            <span class="text">File Drag/Drop is not supported for this browser</span>
+                        </div>
+                    </div>
 					<div class="uploadBar">
-						<div class="uploadProgressBtn upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
+						<div ngf-select ng-model="files" class="uploadProgressBtn upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
 					</div>
 				</form>
 			</div>
