@@ -1,33 +1,41 @@
-var app = angular.module('LaShuang', []);
+var app = angular.module('LaShuang', ['ngFileUpload']);
+
+app.service('globalData', function () {
+	var _searchable = false;
+	var _incPop = false;
+	this.searchable = _searchable;
+	this.incPop = _incPop;
+	
+});
+
 // #1 Scope => controller = switchTemplate
-app.controller('switchTemplate',function ($scope) {
+app.controller('switchTemplate',function ($scope, globalData) {
     $scope.switcher = {
         getInclude: function () {
-			var searched = false; //Important Variable
+			var searched = globalData.searchable; //Important Variable
 			if(searched){
 				return 'includes/dictContent.html';
 			}
 			return 'includes/mainSearch.html';
 		},
 		includePopup: function () {
-			var incPop = false; //Important Variable
-			if(incPop){
+			var included = globalData.incPop; //Important Variable
+			if(included){
 				return 'includes/addNewVocabulary.html';
 			}
 			return '';
 		},
         fundation: function () {
-            //$scope.switcher.includePopup();
+            //Fundation function
         }
     };
-    //$scope.switcher.fundation();
 });
 
 // #2 Scope => ng-include
 
 
 // #3 Scope => controller = pageLoad
-app.controller('pageLoad', function ($scope, $http, fileReader) {
+app.controller('pageLoad', function ($scope, $http) {
     $scope.scriptHandler = {
 		isMobile : function () {
 			var isNotMobile = (function () {
@@ -70,10 +78,10 @@ app.controller('pageLoad', function ($scope, $http, fileReader) {
 		progressBtn : function () {
 			var progressBar = new ProgressBar.Circle('.uploadProgressBtn', {
 				strokeWidth: 5,
-				color: "#faa500",
+				color: "#666",
 				fill: "#000",
 				trailColor: "#666",
-				trailWidth: 10,
+				trailWidth: 5,
 				text: {
 					value: ' ',
 					color: 'transparent',
@@ -82,6 +90,13 @@ app.controller('pageLoad', function ($scope, $http, fileReader) {
 				},
 				duration: 1200,
 				easing: "easeOut"
+			});
+			
+			progressBar.animate(1, {
+				duration: 2000,
+				easing: "easeInOut",
+			}, function() {
+				//console.log('Animation has finished');
 			});
 		},
         showSearchInputVal : function () {
@@ -173,35 +188,42 @@ app.controller('pageLoad', function ($scope, $http, fileReader) {
 			$scope.scriptHandler.isMobile();
             $scope.scriptHandler.requiredFunc();
 			$scope.scriptHandler.showSearchInputVal();
-            
-            $scope.getUploadFile = function () {
-                $scope.progress = 0;
-                fileReader.readAsDataUrl($scope.file, $scope)
-                .then(function(result) {
-                    $scope.imageSrc = result;
-                });
-            };
-            $scope.$on("fileProgress", function(e, progress) {
-                $scope.progress = progress.loaded / progress.total;
-            });
-            
-			$http.get("../includes/ajax/test.php").success(function (data) {
-				$scope.tasks = data;
-				console.log($scope.tasks);
-			});
+//			$http.get("../includes/ajax/test.php").success(function (data) {
+//				$scope.tasks = data;
+//				console.log($scope.tasks);
+//			});
 		}
 	};
     //END OF Handler
     $scope.scriptHandler.pageload();
 });
 
-app.directive("ngFileSelect",function(){
-    return {
-        link: function($scope,el){
-            el.bind("change", function(e){
-                $scope.file = (e.srcElement || e.target).files[0];
-                $scope.getUploadFile();
-            });
+
+
+app.controller('MyCtrl', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
+	var switechable = globalData.searchable;
+	
+	console.log(switechable);
+    $scope.$watch('files', function () {
+        $scope.upload($scope.files);
+    });
+
+    $scope.upload = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                Upload.upload({
+                    url: '../LASHUANG/includes/uploader.php',
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function (data, status, headers, config) {
+                    console.log('file ' + config.file.name );
+					
+					
+                });
+            }
         }
-    }
-});
+    };
+}]);

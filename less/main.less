@@ -258,6 +258,42 @@ a {
                 background-color: @baseColor;
             }
 		}
+		.dragDropZone {
+			width: 100%;
+			max-width: 306px;
+			margin: 0 auto;
+			margin-top: 20px;
+			.drop-box {
+				height: 136px;
+				border: 1px dashed rgb(213, 213, 213);
+				border-radius: 5px;
+				.text {
+					display: block;
+					margin-top: 15%;
+					font-size: 20px;
+					color: rgb(152, 152, 152);
+				}
+				&.dragover {
+					border-color: #e74c3c;
+				}
+			}
+			.noDrag {
+				width: 100%;
+				max-width: 306px;
+				margin: 0 auto;
+				margin-top: 20px;
+				height: 136px;
+				border: 1px dashed rgb(213, 213, 213);
+				border-radius: 5px;
+				.text {
+					display: block;
+					margin-top: 13%;
+					font-size: 20px;
+					color: rgb(152, 152, 152);
+					padding: 0 20px;
+				}
+			}
+		}
 		.uploadBar {
             margin-top: 30px;
 			.uploadProgressBtn {

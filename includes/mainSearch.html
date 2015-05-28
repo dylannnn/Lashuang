@@ -31,20 +31,22 @@
 							</div>
 						</div>
 					</div>
-					<div class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
+					<div ng-controller="MyCtrl" ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"><span class="icon fa fa-camera"></span></div>
+					<div class="dragDropZone" ng-controller="MyCtrl">
+						<div ngf-drop ng-model="files" class="drop-box" 
+							 ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true"
+							 ngf-accept="'image/*'"  ngf-hide-on-drop-not-available="true">
+							<span class="text">Drop Image here</span>
+						</div>
+						<div class="noDrag" ngf-no-file-drop>
+							<span class="text">File Drag/Drop is not supported for this browser</span>
+						</div>
+					</div>
 					<div class="uploadBar">
 						<div class="uploadProgressBtn upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
 					</div>
-					<input type="file" class="btn uploadBtn" ng-file-select="onFileSelect($files)"/>
 				</form>
-                
-                <b>Preview:</b><br />
-   <i ng-hide="imageSrc">No image choosed</i>
-   <img ng-src="{{imageSrc}}" /><br/>
-   <b>Progress:</b>
-  <progress value="{{progress}}"></progress>
-                
 			</div>
 		</div>
 	</section>
-</div>
+</div> 
