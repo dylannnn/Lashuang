@@ -206,11 +206,15 @@ app.controller('pageLoad', function ($scope, $http) {
 
 app.controller('MyCtrl', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
     
-    $('.img').hide();
+    //$('.img').hide();
+	$('.uploadedImage, .uploadProgress').hide();
+	
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
     
+	$scope.log = '';
+	
     $scope.upload = function (files) {
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
@@ -221,14 +225,19 @@ app.controller('MyCtrl', ['$scope', 'Upload', 'globalData', function ($scope, Up
                     url: '../includes/uploader.php',
                     file: file
                 }).progress(function (evt) {
+					$('.uploadProgress').show();
+					
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+					
+					$('.uploadProgress .bar').css("width", progressPercentage +'%');
+					$scope.log = 'progress: ' + progressPercentage + '%' + evt.config.file.name;
+                    
                 }).success(function (data, status, headers, config) {
                     console.log('file ' + config.file.name + " Data is " + data);
                     //$('.img').show();
 					globalData.searchable = true;
                     globalData.uploadedImageName = config.file.name;
-                    console.log("globalData.uploadedImageName is " +  globalData.uploadedImageName );
+                    //console.log("globalData.uploadedImageName is " +  globalData.uploadedImageName );
 					
                 });
             }
@@ -248,7 +257,7 @@ app.controller('showUploadInfo', ['$scope', 'Upload', 'globalData', function ($s
     
 }]);
 
-app.controller('MyCtrl1', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
+app.controller('dictSearch', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
     
     $scope.$watch('files', function () {
         $scope.upload($scope.files);

@@ -11,19 +11,7 @@
 				<span>Français</span> - <span>Chinois</span>
 			</div>
 			<div id="searchWrapper" class="searchInputWrapper">   
-                <div class="uploadedImage" ng-controller="showUploadInfo">
-                    <div class="imgWrapper">
-                        <img class="img" ngf-src="file" ngf-accept="'image/*'">
-                    </div>
-                    <div class="uploadedImageInfo">
-                        <div class="imageName">Image name:<span class="imageName name"></span></div>
-                    </div>
-                    <div class="reUploadBtn hide">
-                        <a href="" class="btn reUpload" data-toggle="tooltip" data-placement="top" title="Reupload a new image to start search"><span class="icon fa fa-upload"></span>Rajouter</a>
-                    </div>
-                </div>
-                
-				<form class="searchForm" ng-controller="MyCtrl1">
+				<form class="searchForm" ng-controller="dictSearch">
 					<div class="searchInput small">
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
@@ -58,6 +46,17 @@
 						<div ngf-select ng-model="files" class="uploadProgressBtn uploadMobile" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
 					</div>
 				</form>
+				<div class="uploadedImage" ng-controller="showUploadInfo">
+                    <div class="imgWrapper">
+                        <img class="img" ngf-src="file" ngf-accept="'image/*'">
+                    </div>
+                    <div class="uploadedImageInfo">
+                        <div class="imageName">Image name:<span class="imageName name"></span></div>
+                    </div>
+                    <div class="reUploadBtn hide">
+                        <a href="" class="btn reUpload" data-toggle="tooltip" data-placement="top" title="Reupload a new image to start search"><span class="icon fa fa-upload"></span>Rajouter</a>
+                    </div>
+                </div>
 			</div>
 			<div class="catalogueWrapper">
 				<h3 class="title">Catalogue:</h3>

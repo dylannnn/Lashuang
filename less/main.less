@@ -250,6 +250,23 @@ a {
 				}
 			}
 		}
+		.uploadProgress {
+			width:100%;
+			max-width: 306px;
+			margin: 0 auto;
+			margin-top: 20px;
+			position: relative;
+			.logInfo {
+				position: absolute;
+				text-align: center;
+				color: white;
+				background-color: rgba(0,0,0,0.2);
+				width: 100%;
+			}
+			.bar {
+				
+			}
+		}
 		.upload {
 			display: inline-block;
 			vertical-align: top;
@@ -923,6 +940,21 @@ a {
     .uploadBar {display: none !important;}
 	#dict .leftCol {
 		border-right: none;
+		padding: 10px 20px;
+	}
+	#dict .rightCol {
+		padding: 10px 20px;
+	}
+	#dict .wordInterpretation {
+		margin: 0;
+	}
+	.dragDropZone {display: none;}
+	#dict .uploadedImage {
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+	#dict .uploadedImage .uploadedImageInfo {
+		text-align: center;
 	}
 }
 /* Landscape phones and portrait tablets */
@@ -953,6 +985,7 @@ a {
 	#dict .leftCol {
 		border-right: none;
 	}
+	.dragDropZone {display: none;}
 }
 /* Portrait phones and smaller */
 @media (max-width: 480px) {
