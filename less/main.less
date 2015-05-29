@@ -368,11 +368,12 @@ a {
 		max-width: inherit;
 	}
 	.leftCol {
-		border-right: 2px solid #F1F4F9;
+		
 		padding-right: 20px;
 	}
 	.rightCol {
 		padding-left: 20px;
+		border-left: 2px solid #F1F4F9;
 	}
 	.logoWrapper {
 		margin-top: 5%;
@@ -440,6 +441,9 @@ a {
 					a {
                         margin-left: 15px;
                         color: black;
+						&:hover {
+							text-decoration: underline;
+						}
                         span.text {
 						
 						}
@@ -939,10 +943,10 @@ a {
 @media (min-width: 768px) and (max-width: 991px) {
     .uploadBar {display: none !important;}
 	#dict .leftCol {
-		border-right: none;
 		padding: 10px 20px;
 	}
 	#dict .rightCol {
+		border-left: none;
 		padding: 10px 20px;
 	}
 	#dict .wordInterpretation {
@@ -959,6 +963,20 @@ a {
 }
 /* Landscape phones and portrait tablets */
 @media (max-width: 767px) {
+	.RespColsWrapper .RespCol {
+		padding: 10px 0;
+	}
+	#dict .wordInterpretation {
+		margin: 0;
+	}
+	#dict .uploadedImage {
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+	#dict .uploadedImage .uploadedImageInfo {
+		text-align: center;
+	}
+	
 	#addNewWord {
 		.innerContent {
 			.tabs {
@@ -982,8 +1000,9 @@ a {
 		}
 	}
 	
-	#dict .leftCol {
-		border-right: none;
+	#dict .rightCol {
+		padding-left: 0;
+		border-left: none;
 	}
 	.dragDropZone {display: none;}
 }
@@ -1015,15 +1034,17 @@ a {
 			}
 		}
 	}
-	
+	.RespColsWrapper .RespCol {
+		padding: 10px 0;
+	}
 	.RespRow {
 		padding: 20px;
 	}
 	#identity .logoWrapper {
 		margin-top: 5%;
 	}
-	#dict .leftCol {
-		border-right: none;
+	#dict .rightCol {
+		border-left: none;
 	}
 	#searchWrapper {
 		.searchForm  {

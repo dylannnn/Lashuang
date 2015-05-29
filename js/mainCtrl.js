@@ -5,11 +5,105 @@ app.service('globalData', function () {
 	var _incPop = false;
     var _uploadedImageName = '';
     var _uploadedImage = {};
+	
+	var _myFunc = function () {
+		var myFuncHandler = {
+			iniFunc : function () {
+				$("[data-toggle='tooltip']").tooltip();
+				// ##1 - Bind the upload btn
+				$('#searchWrapper .upload').click(function () {
+					$('#searchWrapper .uploadBtn').click();
+				});
+
+				$('#searchWrapper .uploadMobile').click(function () {
+					$('#searchWrapper .uploadBtn').click();
+				});
+
+				$('.ajaxResultWrapper').hide();
+
+				$('.input').on('focus', function () {
+					$('.searchIcon .icon').addClass('focus');
+				});
+
+				$('.input').on('focusout', function () {
+					$('.searchIcon .icon').removeClass('focus');
+				});
+
+				// Magnific Popup
+				$('a.popup').magnificPopup({
+					type: 'inline',
+					midClick: true,
+					closeBtnInside: true,
+					closeOnBgClick: false,
+					closeOnContentClick: false,
+					mainClass: 'laPop mfp-fade',
+					removalDelay: 300,
+					fixedBgPos: true,
+					callbacks: {
+						open: function () {
+							// Will fire when this exact popup is opened
+							// this - is Magnific Popup object
+						},
+						close: function () {
+							// Will fire when popup is closed
+						},
+						updateStatus: function (data) {
+							console.log('Status changed', data);
+							// "data" is an object that has two properties:
+							// "data.status" - current status type, can be "loading", "error", "ready"
+							// "data.text" - text that will be displayed (e.g. "Loading...")
+							// you may modify this properties to change current status or its text dynamically
+						},
+						parseAjax: function (mfpResponse) {
+							// mfpResponse.data is a "data" object from ajax "success" callback
+							// for simple HTML file, it will be just String
+							// You may modify it to change contents of the popup
+							// For example, to show just #some-element:
+							// mfpResponse.data = $(mfpResponse.data).find('#some-element');
+
+							// mfpResponse.data must be a String or a DOM (jQuery) element
+
+							console.log('Ajax content loaded:', mfpResponse);
+						},
+						ajaxContentAdded: function () {
+							// Ajax content is loaded and appended to DOM
+							console.log(this.content);
+						}
+					}
+				});
+				
+				var searchInput = $('#searchWrapper .input');
+				searchInput.keyup(function () {
+					var strLength = searchInput.val().length;
+					if (strLength > 0) {
+						console.log("Typed!!!");
+
+						//searchHandler.readJSON();
+
+						$('.uploadBar').hide();
+						$('.ajaxResultWrapper').slideDown('fast');
+					} else if (strLength == 0) {
+						$('.ajaxResultWrapper').slideUp('fast', function () {
+							$('.uploadBar').show();
+						});
+					}
+				});
+				
+			}, //iniFun
+			showSearchInputVal : function () {
+				
+			}//showSearchInputVal
+		};
+		myFuncHandler.iniFunc();
+		myFuncHandler.showSearchInputVal();
+	}
     
 	this.searchable = _searchable;
 	this.incPop = _incPop;
     this.uploadedImageName = _uploadedImageName;
 	this.uploadedImage = _uploadedImage;
+	this.myFunc = _myFunc;
+
 });
 
 // #1 Scope => controller = switchTemplate
@@ -202,8 +296,6 @@ app.controller('pageLoad', function ($scope, $http) {
     $scope.scriptHandler.pageload();
 });
 
-
-
 app.controller('MyCtrl', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
     
     //$('.img').hide();
@@ -258,7 +350,9 @@ app.controller('showUploadInfo', ['$scope', 'Upload', 'globalData', function ($s
 }]);
 
 app.controller('dictSearch', ['$scope', 'Upload', 'globalData', function ($scope, Upload, globalData) {
-    
+    globalData.myFunc();
+	
+	
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -282,5 +376,10 @@ app.controller('dictSearch', ['$scope', 'Upload', 'globalData', function ($scope
             }
         }
     };
-    
 }]);
+
+$(document).ready(function () {
+	$('a.addNewWord').click(function () {
+		console.log("YESSSSS");
+	});
+});
