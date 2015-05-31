@@ -1,0 +1,6 @@
+<form name="addWord" ng-submit="addWord()" novalidate>
+    <div class="inputWrapper">
+        <input type="teex" name="word" placeholder="Add new word" ng-model="word" ng-required="true">
+        <button type="submit" class="btn" ng-disabled="addWord.$invalid"><span class="fa fa-plus"></span></button>
+    </div>
+</form>

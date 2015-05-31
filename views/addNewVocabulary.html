@@ -1,0 +1,143 @@
+<div class="tabs browser" ng-controller="OpenPopup">
+    <div class="tabpanel" role="tabpanel">
+        <!-- Nav tabs -->
+        <h1 class="title">Add a new vocabulary</h1>
+        <div class="word">
+            <input placeholder="Type in here">
+            <span class="icon fa fa-close"></span>
+        </div>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#tab1" aria-controls="home" role="tab" data-toggle="tab">Dictionaire</a></li>
+            <li role="presentation"><a href="#tab2" aria-controls="profile" role="tab" data-toggle="tab">Exemple(s)</a></li>
+            <li role="presentation"><a href="#tab3" aria-controls="messages" role="tab" data-toggle="tab">Conjugaison</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <div class="dictContent">
+                    <div class="explanationWrapper">
+                        <div class="addModule">
+                            <a class="btn add"><span class="fa fa-plus"></span></a>
+                            <div class="exp template">
+                                <div class="text sel">Select a POS</div>
+                                <select name="pos">
+									<option value="n">n</option>
+									<option value="n. f ">n. f</option>
+									<option value="prép">prép</option>
+									<option value="prép">pron. interr.</option>
+                                </select>
+                                <div class="text addExp">Add explanation:</div>
+                                <input class="addExpInput" placeholder="Type to edit">
+                            </div>
+                            <a class="btn submit"><span class="fa fa-check"></span></a>
+                        </div>
+						<div class="newContent">
+							<ul class="explanationList">
+								<li class="pos">
+									<div class="posContent">n</div>
+									<ul class="listItems">
+										<li class="list">
+											<span class="listItem">nom 名词</span>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="addModule">
+							<a class="btn add"><span class="fa fa-plus"></span></a>
+							<div class="comusage template">
+								<div class="text">添加常见用法</div>
+								<input placeholder="Type to edit">
+							</div>
+							<a class="btn submit"><span class="fa fa-check"></span></a>
+						</div>
+						<div class="newContent">
+							<div class="commonUsage">
+								<h4 class="title">常见用法</h4>
+								<div class="contents">
+									<ul>
+										<li>commonUsage</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab2">
+                <div class="dictContent">
+                    <div class="exampleWrapper">
+                        <div class="addModule">
+                            <a class="btn add"><span class="fa fa-plus"></span></a>
+                            <div class="exp template">
+                                <div class="text">Add an example:</div>
+                                <input placeholder="Type to edit">
+                            </div>
+                            <a class="btn submit"><span class="fa fa-check"></span></a>
+                        </div>
+						<div class="newContent">
+							<ul class="exampleList">
+								<li class="list">
+									example
+								</li>
+							</ul>
+						</div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab3">
+                <div class="dictContent">
+                    <div class="conjugaisonWrapper">
+                        <div class="addModule">
+                            <a class="btn add"><span class="fa fa-plus"></span></a>
+                            <div class="exp template">
+                                <div class="text">Add an example:</div>
+                                <input placeholder="Type to edit">
+                            </div>
+                            <a class="btn submit"><span class="fa fa-check"></span></a>
+                        </div>
+						<div class="newContent">
+							<div class="original">
+								<span class="text cn">动词原型：</span><span class="text">{original}</span>
+							</div>
+							<ul class="conjugaisonList">
+								<li class="list">
+									<a href="#item1" data-toggle="collapse" aria-expanded="false" aria-controls="conjuMethod">
+										<span class="text">变位方法</span>
+									</a>
+								</li>
+								<div class="collapse content" id="item1">
+									meghod
+								</div>
+								<li class="list">
+									<a href="#item2" data-toggle="collapse" aria-expanded="false" aria-controls="conjuIntro">
+										<span class="text">变位说明</span>
+									</a>
+								</li>
+								<div class="collapse content" id="item2">
+									intro
+								</div>
+								<li class="list">
+									<a href="#item3" data-toggle="collapse" aria-expanded="false" aria-controls="conjuTips">
+										<span class="text">变位提示</span>
+									</a>
+								</li>
+								<div class="collapse content" id="item3">
+									tips
+								</div>
+							</ul>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="funcBtn">
+    <a class="btn save">
+        <span class="text">Save</span>
+    </a>
+    <a class="btn cancel">
+        <span class="text">Cancel</span>
+    </a>
+</div>
