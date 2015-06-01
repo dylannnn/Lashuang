@@ -1,12 +1,17 @@
-app.controller("mainSearch", ["$scope", "$location", "$firebaseObject", "$firebaseArray", "pageLoad", "Upload", function ($scope, $location, $firebaseObject, $firebaseArray, pageLoad, Upload) {
+app.controller("mainSearch", ["$scope", "$rootScope", "$location", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
     //initial function running
     pageLoad.iniFunc();
+    
+    $scope.selectedTab = 1;
+    
     //Add New Word
     $('.successAdded').hide();
     $scope.addWord = function () {
         console.log("Clicked!");
-        var ref = new Firebase("https://lashuang.firebaseio.com");
+        var ref = new Firebase(FIREBASE_URL);
         var dictionary = ref.child('dictionary');
+
+        //var dictContent = 
         dictionary.push({
             word : $scope.word.newWord,
             image : $scope.word.imageName
@@ -16,12 +21,12 @@ app.controller("mainSearch", ["$scope", "$location", "$firebaseObject", "$fireba
             } else {
                 //$scope.newWord = '';
                 console.log('Push Successed');
-                clearInput();
+                $scope.clearInput();
                 $scope.added();
             }
         });
     };
-    function clearInput () {
+    $scope.clearInput = function () {
         $('.newWordInput').val('');
         $('.submitNewWordInput').attr("disabled", "disabled");
     }
@@ -42,9 +47,9 @@ app.controller("mainSearch", ["$scope", "$location", "$firebaseObject", "$fireba
         }
     };
     
-    $scope.disableInput();
+    //$scope.disableInput();
     
-    var requestRef = new Firebase("https://lashuang.firebaseio.com/dictionary");
+    var requestRef = new Firebase(FIREBASE_URL + "dictionary");
         $scope.requestDictionary = $firebaseArray(requestRef);
     
     $scope.deleteWord = function (key) {
@@ -52,21 +57,19 @@ app.controller("mainSearch", ["$scope", "$location", "$firebaseObject", "$fireba
         $scope.requestDictionary.$remove(key);
         
     };
+    
+    
     //Get input fileds value
     $scope.checkInput = function () {
 
-        var ref = new Firebase("https://lashuang.firebaseio.com/dictionary");
+        var ref = new Firebase(FIREBASE_URL + "dictionary");
         $scope.dictionary = $firebaseArray(ref);
         
         $scope.searchWordLength = $('input.input').val().length;
         //console.log(searchWordLength);
         $scope.resultItems = $('.ajaxResultList li').length;
         console.log("resultItems " + $scope.resultItems);
-        if ($scope.searchWordLength > 0 ) {
-            //$('.uploadBar').hide();
-        } else {
-            //$('.uploadBar').show();
-        }
+
     };
     
     //$('.uploadedImage, .uploadProgress').hide();
@@ -96,8 +99,10 @@ app.controller("mainSearch", ["$scope", "$location", "$firebaseObject", "$fireba
 					$scope.log = 'Progress: ' + progressPercentage + '%. ' + 'File: ' + evt.config.file.name;
                     
                 }).success(function (data, status, headers, config) {
-                    $scope.imageFile = files[0]; //Show Image
+                    //$scope.imageFile = files[0]; //Show Image
                     console.log('file ' + config.file.name + " Data is " + data);
+                    $rootScope.imgFileName = config.file.name;
+                    $rootScope.imgFile = files[0];
                     $location.path('/dict');
                     //$('.uploadedImage, .uploadProgress').show();
                     //$('.img').show();

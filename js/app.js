@@ -1,4 +1,4 @@
-var app = angular.module('LaShuang', ['ngRoute', 'appCtrls', 'firebase', 'ngFileUpload']).constant('FIREBASE_URL', 'https://attendanceldcapp.firebaseio.com/');
+var app = angular.module('LaShuang', ['ngRoute', 'appCtrls', 'firebase', 'ngFileUpload']).constant('FIREBASE_URL', 'https://lashuang.firebaseio.com/');
 
 var appCtrls = angular.module('appCtrls', ['firebase','ngFileUpload']);
 
@@ -118,9 +118,11 @@ app.factory('pageLoad', function($firebase, $rootScope, $routeParams, $location,
                     open: function () {
                         // Will fire when this exact popup is opened
                         // this - is Magnific Popup object
+                        //$scope.disableInput();
                     },
                     close: function () {
                         // Will fire when popup is closed
+                        //$scope.clearInput();
                     },
                     updateStatus: function (data) {
                         console.log('Status changed', data);

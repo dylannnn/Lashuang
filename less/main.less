@@ -578,129 +578,46 @@ a {
 }
 
 /*Tabs*/
-.tabs {
+.tabbable {
     margin-top: 30px;
-    .tabpanel {
-        ul.nav {
-            li {
-                a {
-                    color: lighten(@baseColor,70%);
-                    &:hover {
-                        color: @baseColor;
-                    }
-                }
-            }
-            li.active {
-                a {
+    ul.nav {
+        li {
+            a {
+                color: lighten(@baseColor,70%);
+                &:hover {
                     color: @baseColor;
                 }
             }
         }
-        .tab-content {
-            margin-top: 20px;
-            .tab-pane {
-                .dictContent {
-					/*Global UL > LI Style*/
-					ul.listItems {
-						margin-left: 40px;
-						li.list {
-							margin: 3px 0;
-							list-style: disc;
-							.listItem {
-								&.fr, &.cn { display: block;}
-							}
-						}
-					}
-					ol.listItems {
-						margin-left: 40px;
-						li.list {
-							margin: 3px 0;
-							.listItem {
-								&.fr, &.cn { 
-									display: block;
-									margin-top: 3px;
-								}
-							}
-						}
-					}
-					/*END*/
-                    .explanationWrapper {
-                        .explanationList {
-							&.listItems {
-								margin: 0;
-								
-							}
-							.pos {
-								list-style: none;
-							}
-                        }
-                    }
-					.commonUsage {
-						margin-top: 25px; 
-						h4.title {
-						}
-						.contents {
-						}
-					}
-                    .exampleWrapper {
-                    }
-                    .conjugaisonWrapper {
-                        .original {
-                            
-                        }
-                        .conjugaisonList {
-                            margin-top: 20px;
-                            -webkit-padding-start: 0;
-                            .list {
-                                display: inherit;
-                                margin-bottom: 10px;
-                                a {
-									padding: 10px 20px;
-									display: block;
-									background-color: lighten(@baseColor, 95%);
-                                    &:hover {
-                                        text-decoration: none;
-										background-color: darken(lighten(@baseColor, 95%), 5%);
-                                    }
-                                    &:focus {
-                                        text-decoration: none;
-                                        color: #337ab7;
-                                    }
-                                    span.icon {margin-right: 10px}
-                                    span.text {}
-                                }
-                            }
-                            .content {
-                                margin-top: 20px;
-                                margin-bottom: 20px;
-                                padding: 0 20px;
-                            }
-                        }
-                    }
-                }
+        li.active {
+            a {
+                color: @baseColor;
             }
         }
-		.editBtn {
-			margin-top:25px;
-			.edit {
-				padding: 3px 6px;
-				font-size: 10px;
-				background: lighten(@baseColor,80%);
-				color: darken(white,80%);
-				transition: all 0.1s;
-				&:hover {
-					background: @baseColor;
-					color: white;
-					transition: all 0.3s;
-				}
-				.icon {
-					padding-right: 6px;
-				}
-			}
-		}
+    }
+
+    .tab-content {
+        margin-top: 20px;
     }
 }
-
+.editBtn {
+    margin: 25px 40px 0;
+    .edit {
+        padding: 3px 6px;
+        font-size: 10px;
+        background: lighten(@baseColor,80%);
+        color: darken(white,80%);
+        transition: all 0.1s;
+        &:hover {
+            background: @baseColor;
+            color: white;
+            transition: all 0.3s;
+        }
+        .icon {
+            padding-right: 6px;
+        }
+    }
+}
 /*Popup Content*/
 #popup {
 
