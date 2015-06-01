@@ -37,22 +37,6 @@ app.filter('searchFor', function(){
     };
 });
 
-//app.filter('searchFor', function(){
-//    return function(dictionary, searchWord){
-//        if(!searchWord){
-//            return dictionary;
-//        }
-//        var result = [];
-//        searchWord = searchWord.toLowerCase();
-//        angular.forEach(dictionary, function(item){
-//            if(item.word.toLowerCase().indexOf(searchWord) !== -1){
-//                result.push(item);
-//            }
-//        });
-//        return result;
-//    };
-//});
-
 app.directive('enterSubmit', function () {
     return {
         restrict: 'A',
@@ -69,6 +53,42 @@ app.directive('enterSubmit', function () {
         }
     }
 });
+//http://code.ciphertrick.com/2015/03/15/change-row-selection-using-arrows-in-ng-repeat/
+app.directive('arrowSelector',['$document',function($document){
+    return{
+        restrict:'A',
+        link:function(scope,elem,attrs,ctrl){
+            var elemFocus = false;             
+            elem.on('mouseenter',function(){
+                elemFocus = true;
+            });
+            elem.on('mouseleave',function(){
+                elemFocus = false;
+            });
+            $document.bind('keydown',function(e){
+                if(elemFocus){
+                    if(e.keyCode == 38){
+                        console.log(scope.selectedRow);
+                        if(scope.selectedRow == 0){
+                            return;
+                        }
+                        scope.selectedRow--;
+                        scope.$apply();
+                        e.preventDefault();
+                    }
+                    if(e.keyCode == 40){
+                        if(scope.selectedRow == scope.foodItems.length - 1){
+                            return;
+                        }
+                        scope.selectedRow++;
+                        scope.$apply();
+                        e.preventDefault();
+                    }
+                }
+            });
+        }
+    };
+}]);
 
 app.factory('pageLoad', function($firebase, $rootScope, $routeParams, $location, FIREBASE_URL) {
 
