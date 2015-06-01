@@ -37,10 +37,10 @@
 						<div class="progress-bar bar" role="progressbar">
 						</div>
 					</div>
-                    <div class="uploadedImage" ng-show="imgFileName">
-                        {{ imgFileName }}
+                    <div class="uploadedImage" ng-show="upluadFileFullName">
+                        {{ upluadFileFullName }}
                     <!--ng-show="progressBar"-->
-                        <img class="img" ngf-src="imgFile" ngf-accept="'image/*'">
+                        <img class="img" ngf-src="upluadFile" ngf-accept="'image/*'">
                     </div>
 <!--
                     <div class="dragDropZone hide">
@@ -57,10 +57,6 @@
 					<div class="uploadBar" ng-hide="searchWordLength">
 						<div ngf-select ng-model="files" class="uploadProgressBtn uploadMobile" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start"></div>
 					</div>
-                    <div class="reUploadBtn hide">
-                        <a href="" class="btn reUpload" data-toggle="tooltip" data-placement="top" title="Reupload a new image to start search"><span class="icon fa fa-upload"></span>Rajouter</a>
-                    </div>
-                    
 				</form>
 			</div>
 			<div class="catalogueWrapper" >

@@ -1,4 +1,4 @@
-app.controller("mainSearch", ["$scope", "$rootScope", "$location", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
+app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
     //initial function running
     pageLoad.iniFunc();
     
@@ -87,7 +87,7 @@ app.controller("mainSearch", ["$scope", "$rootScope", "$location", "FIREBASE_URL
                 //globalData.uploadedImage = file;
                 //console.log("Images is " +  globalData.uploadedImage);
                 Upload.upload({
-                    url: '../includes/uploader.php',
+                    url: '../php/uploader.php',
                     file: file
                 }).progress(function (evt) {
 					//$('.uploadProgress').show();
