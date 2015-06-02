@@ -12,8 +12,8 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/search.html',
             controller:'searchController'
         }).
-        when('/about', {
-            templateUrl: 'views/about.html',
+        when('/add', {
+            templateUrl: 'views/addNew.html',
             controller:''
         }).
         otherwise({
