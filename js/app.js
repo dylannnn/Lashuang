@@ -10,11 +10,15 @@ app.config(['$routeProvider', function ($routeProvider) {
         }).
         when('/dict', {
             templateUrl: 'views/search.html',
-            controller:'searchController'
+            controller:'searchController',
         }).
         when('/add', {
             templateUrl: 'views/addNew.html',
             controller:''
+        }).
+        when('/admin', {
+            templateUrl: 'views/backendAdd.html',
+            controller:'adminAddController'
         }).
         otherwise({
             redirectTo: '/home'
@@ -36,10 +40,3 @@ app.filter('searchFor', function(){
         return result;
     };
 });
-
-
-app.controller('test', ['$scope', function ($scope) {
-    $scope.myFunc = function () {
-        console.log("!!!!!!");
-    };
-}]);

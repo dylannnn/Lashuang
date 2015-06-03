@@ -3,7 +3,7 @@
 		<div class="RespCol">
 			<div id="identity">
 				<div class="logoWrapper">
-					<a ng-href="/" class="logo">
+					<a ng-href="#/" class="logo">
 						<img src="img/logo.svg"/>
 					</a>
 				</div>
@@ -18,7 +18,7 @@
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
 						<div class="inputWrapper">
-							<input id="input" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" autofocus ng-model="searchWord" ngEnter="mySearch() == true" ng-keyup="checkInput()">
+							<input id="input" class="form-control input" type="search" name="search" placeholder="Rechercher" tabindex="1" autofocus ng-model="searchWord" ng-enter="search()" ng-keyup="checkInput()">
 							<div class="ajaxResultWrapper" ng-show="searchWord.length">
 								<ul class="ajaxResultList">
                                     <li class="ajaxResult" ng-repeat="dict in dictionary | searchFor:searchWord">
@@ -30,6 +30,7 @@
                                 </div>
 							</div>
 						</div>
+						<div class="errmessage center" ng-show="needSearchWord">You need type something to search...</div>
 					</div>
 					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start">
                         <span class="icon fa fa-camera"></span>

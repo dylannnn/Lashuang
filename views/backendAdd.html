@@ -1,0 +1,26 @@
+<div>
+	<div>Add New Word</div>
+	<input placeholder="Add new Word" ng-model="word.newWord"> 
+</div>
+<div>
+	<div>Add Explanation</div>
+	<input placeholder="Add explanation" ng-model="word.newWordExp"> 
+</div>
+<div>
+	<div>Add Common Usage</div>
+	<input placeholder="Add common usage" ng-model="word.newWordCommonUsage"> 
+</div>
+<div>
+	<div>Add Example(s)</div>
+	<input placeholder="Add examples" ng-model="word.newWordExamples"> 
+</div>
+<br>
+<br>
+<div class="btn btn-info" ng-click="addNewWord()">Add new Word</div>
+<br>
+<br>
+<br>
+<div ng-repeat=" (key,dict) in requestDictionary">
+	<div>{{dict.word}}</div>
+	<div class="btn" ng-click="deleteWord(key)">-</div>
+</div>

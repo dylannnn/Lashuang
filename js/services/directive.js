@@ -1,18 +1,14 @@
-app.directive('enterSubmit', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, elem, attrs) {
-            elem.bind('keydown', function(event) {
-                 var code = event.keyCode || event.which;
-                 if (code === 13) {
-                       if (!event.shiftKey) {
-                            event.preventDefault();
-                            scope.$apply(attrs.enterSubmit);
-                       }
-                 }
-            });
-        }
-    }
+app.directive('ngEnter', function() {
+	return function(scope, element, attrs) {
+		element.bind("keydown keypress", function(event) {
+			if(event.which === 13) {
+				scope.$apply(function(){
+					scope.$eval(attrs.ngEnter);
+				});
+			event.preventDefault();
+			}
+		});
+	};
 });
 //http://code.ciphertrick.com/2015/03/15/change-row-selection-using-arrows-in-ng-repeat/
 app.directive('arrowSelector',['$document',function($document){

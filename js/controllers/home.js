@@ -2,7 +2,8 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
     
     //initial function running
     pageLoad.iniFunc();
-    
+    $scope.needSearchWord = false;
+	$scope.enterPressed = false;
     //Get input fileds value
     $scope.checkInput = function () {
 
@@ -12,8 +13,26 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
         
         $scope.searchWordLength = $('input.input').val().length;
         $scope.resultItems = $('.ajaxResultList li').length;
-
+		console.log("$scope.searchWordLength is " + $scope.searchWordLength);
+		console.log("$scope.resultItems are " + $scope.resultItems);
+		if ($scope.searchWordLength == 0 && $scope.enterPressed) {
+			$scope.needSearchWord = true;
+		} else {
+			$scope.needSearchWord = false;
+		}
     };
+	$scope.search = function () {
+		$scope.enterPressed = true;
+		console.log("Enter key pressed!");
+		
+		if ($scope.searchWordLength <= 0 || $scope.searchWordLength == undefined) {
+			$scope.needSearchWord = true;
+		} else {
+			$scope.needSearchWord = false;
+			$location.path('/dict/').search({q: $scope.searchWord});
+		}
+	}
+	
 	//Image Upload function
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -40,9 +59,10 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
                     $rootScope.upluadFileFullName = _fileNameArr[0] + '.' + _fileNameArr[1]
                     $rootScope.upluadFile = files[0];
                     console.log("upluadFileName: " + $rootScope.upluadFileName + '; upluadFileFullName: ' + $rootScope.upluadFileFullName);
-                    //$location.path('/dict');
+					$location.path('/dict/').search({q: $rootScope.upluadFileName});
                 });
             }
         }
     };
+	
 }]);

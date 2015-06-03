@@ -3,7 +3,69 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBA
     pageLoad.iniFunc();
     
     $scope.selectedTab = 1;
-    
+	
+	//Get query word
+	function getQueryVal() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+		function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+	}
+
+	//$rootScope.queryWord = getQueryVal()["word"];
+	//console.log(queryWord);
+	
+	$rootScope.found = false;
+	console.log("1. $rootScope.found is " + $rootScope.found);
+	function searchWord () {
+		var ref = new Firebase(FIREBASE_URL + "dictionary");
+        var dictionary = $firebaseArray(ref);
+		
+		dictionary.$loaded().then(function(data) {
+			console.log("Data length: " + data.length);
+			console.dir(data);
+			
+			$rootScope.queryWord = getQueryVal()["word"];
+			
+			var words = [];
+			for (var i = 0; i < data.length; i++) {
+				var wordContent = data[i];
+				words.push(wordContent.word);
+			}
+			console.dir(words);
+			
+			if (words.indexOf($rootScope.queryWord) != -1) {
+				$rootScope.found = true;
+				console.log("2. $rootScope.found is " + $rootScope.found);
+				$scope.searchedWord = $rootScope.queryWord;
+				
+			} else {
+				$rootScope.found = false;
+			}
+			
+			
+				
+	
+	function loadQueryWordContent () {
+		console.log("Loading...");
+		var ref = new Firebase(FIREBASE_URL + "dictionary");
+        $scope.loadDictionary = $firebaseArray(ref);
+	}
+	console.log("3. $rootScope.found is " + $rootScope.found);
+	if ($rootScope.found) {
+		console.log("Founded");
+		loadQueryWordContent ();
+	}
+			
+			
+			
+			
+		});
+	}
+	searchWord ();
+	
     //Add New Word
     $('.successAdded').hide();
     $scope.addWord = function () {

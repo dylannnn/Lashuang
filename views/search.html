@@ -2,7 +2,7 @@
 	<section id="dict" class="RespColsWrapper dict">
 		<div class="RespCol col-lg-3 col-md-3 col-sm-12 col-xs-12 leftCol" >
 			<div class="logoWrapper">
-				<a href="/" class="logo">
+				<a href="#/" class="logo">
 					<img src="img/logo.png"/>
 				</a>
 			</div>
@@ -38,7 +38,7 @@
 						</div>
 					</div>
                     <div class="uploadedImage" ng-show="upluadFileFullName">
-                        {{ upluadFileFullName }}
+                        <p><bold>Image name:</bold> {{ upluadFileFullName }}</p>
                     <!--ng-show="progressBar"-->
                         <img class="img" ngf-src="upluadFile" ngf-accept="'image/*'">
                     </div>
@@ -63,7 +63,7 @@
 				<h3 class="title">Catalogue:</h3>
 				<div class="catalogueContent">
 					<ul class="wordList">
-						<li class="word" ng-repeat="dict in dictionary | searchFor:searchWord:strict">
+						<li class="word" ng-repeat="dict in dict | searchFor:searchWord:strict">
 							<a href=""><span class="text">{{dict.word}}</span></a>
 						</li>
 					</ul>
@@ -81,13 +81,16 @@
 			<div class="wordInterpretation">
 				<div class="topBar">
 					<div class="wordWrapper">
-						<div class="word">{{word}}</div>
-						<div class="wordNotExist">
+						<div class="word" ng-repeat="dict in loadDictionary | searchFor:searchedWord">{{dict.word}}</div>
+						<div class="wordNotExist" ng-hide="found">
 							<div class="subTitle">n'existe pas, vous pouvez le créer ici.</div>
 							<div class="btnWrapper">
 								<a href="#addNewWord" class="btn addNewWord popup" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image.">
 									<span class="text"><i class="icon fa fa-plus"></i>Ajouter</span>
 								</a>
+								
+								<!--<a class="btn" ng-click="requestAdd='true'">Add</a>-->
+								
 							</div>
 						</div>
 					</div>
@@ -103,11 +106,19 @@
                         </li>
                     </ul>
                     <div class="tab-content" ng-show="selectedTab == 1">
-                        1. adfasdf asdfadsf asdf adsf asdf asdf asdf asdf adsf adsf asdf asdf asdf adsf asdf sdaf dsghtyjkgfbsdf afdg afdg sdfhsfdg asg sghdfhx asfd asd gehfgdsfgsdgh sdfg sdfhsdsgdf a sdfsgaeht arg sdfg dfg sdfg adfg adfg gdsry
+						<ul>
+							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.explanation}}</li>
+						</ul>
+						<div>常见用法</div>
+						<ul>
+							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.commonUsage}}</li>
+						</ul>
                     </div>
-
                     <div class="tab-content" ng-show="selectedTab == 2">
-                        2. adfasdf asdfadsf asdf adsf asdf asdf asdf asdf adsf adsf asdf asdf asdf adsf asdf sdaf dsghtyjkgfbsdf afdg afdg sdfhsfdg asg sghdfhx asfd asd gehfgdsfgsdgh sdfg sdfhsdsgdf a sdfsgaeht arg sdfg dfg sdfg adfg adfg gdsry
+						<div>例句</div>
+						<ul>
+							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.examples}}</li>
+						</ul>
                     </div>
                 </div>
 			</div>
@@ -120,23 +131,49 @@
 		<!--Right Col-->
 	</section>
 </div>
+
+
+<!--
+<div ng-switch on="requestAdd">
+	<div ng-switch-when="true">
+		<div ng-include="'views/backendAdd.html'"></div>
+    </div>
+</div>
+-->
+
+
+
 <div id="popup" class="popupWrapper">
     <div id="addNewWord" class="addNewWordWrapper noneDisplay">
         <div class="innerContent">
-            <form name="addWordForm" ng-submit="addWord()"novalidate>
-                <div class="inputWrapper">
-                    <input class='newWordInput' type="text" name="newWord" placeholder="Add new word" ng-model="word.newWord" ng-required="true" autofocus ng-keyup="disableInput()">
-                    <input class='newWordInput' type="text" name="newWord" placeholder="Add Image name" ng-model="word.imageName" ng-required="true" autofocus ng-keyup="disableInput()">
-                    <button type="submit" class="btn submitNewWordInput">
-                        <span class="fa fa-plus"></span>
-                    </button>
-                    <p class="successAdded">Add succed!</p>
-                </div>
-            </form>
+			
+		<div>
+		<div>Add New Word</div>
+		<input placeholder="Add new Word" ng-model="word.newWord"> 
+		</div>
+		<div>
+		<div>Add Explanation</div>
+		<input placeholder="Add explanation" ng-model="word.newWordExp"> 
+		</div>
+		<div>
+		<div>Add Common Usage</div>
+		<input placeholder="Add common usage" ng-model="word.newWordCommonUsage"> 
+		</div>
+		<div>
+		<div>Add Example(s)</div>
+		<input placeholder="Add examples" ng-model="word.newWordExamples"> 
+		</div>
+		<br>
+		<br>
+		<div class="btn btn-info" ng-click="addNewWord()">Add new Word</div>
+		<br>
+		<br>
+		<br>
+		<h3>Current word library</h3>
             
             <div ng-repeat=" (key,dict) in requestDictionary">
-                <div>{{dict.word}}</div>
-                <div class="btn" ng-click="deleteWord(key)">-</div>
+                <div>{{dict.word}} <span class="btn btn-danger btn-xs" ng-click="deleteWord(key)">Delete ? </span></div>
+          
             </div>
         </div>
     </div>
