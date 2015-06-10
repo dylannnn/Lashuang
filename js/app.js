@@ -4,7 +4,7 @@ var appCtrls = angular.module('appCtrls', ['firebase','ngFileUpload']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
-        when('/home', {
+        when('/', {
             templateUrl: 'views/home.html',
             controller:'homeController'
         }).
@@ -12,16 +12,8 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/search.html',
             controller:'searchController',
         }).
-        when('/add', {
-            templateUrl: 'views/addNew.html',
-            controller:''
-        }).
-        when('/admin', {
-            templateUrl: 'views/backendAdd.html',
-            controller:'adminAddController'
-        }).
         otherwise({
-            redirectTo: '/home'
+            redirectTo: '/'
         });
 }]);
 

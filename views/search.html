@@ -146,26 +146,62 @@
 <div id="popup" class="popupWrapper">
     <div id="addNewWord" class="addNewWordWrapper noneDisplay">
         <div class="innerContent">
+			<div class="input-group">
+				<span class="input-group-addon">Add new Word</span>
+				<input type="text" class="form-control" placeholder="New Word" ng-model="word.newWord">
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">Add Explanation</span>
+				<input type="text" class="form-control" placeholder="Add explanation" ng-model="word.newWordExp">
+				<a class="input-group-addon "><span class="fa fa-plus"></span></a>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">Add Common Usage</span>
+				<input type="text" class="form-control" placeholder="Add Common Usage" ng-model="word.newWordCommonUsage">
+				<a class="input-group-addon"><span class="fa fa-plus"></span></a>
+			</div>
+			<div class="input-group">
+				<span class="input-group-addon">Add Example(s)</span>
+				<input type="text" class="form-control" placeholder="Add example(s)" ng-model="word.newWordExamples">
+				<a class="input-group-addon"><span class="fa fa-plus"></span></a>
+			</div>
+			<div class="btn btn-info" ng-click="addNewWord()">Submit</div>
 			
-		<div>
-		<div>Add New Word</div>
-		<input placeholder="Add new Word" ng-model="word.newWord"> 
-		</div>
-		<div>
-		<div>Add Explanation</div>
-		<input placeholder="Add explanation" ng-model="word.newWordExp"> 
-		</div>
-		<div>
-		<div>Add Common Usage</div>
-		<input placeholder="Add common usage" ng-model="word.newWordCommonUsage"> 
-		</div>
-		<div>
-		<div>Add Example(s)</div>
-		<input placeholder="Add examples" ng-model="word.newWordExamples"> 
-		</div>
-		<br>
-		<br>
-		<div class="btn btn-info" ng-click="addNewWord()">Add new Word</div>
+			
+			
+			<div class="addWrapper">
+				<div class="wordWrapper">
+					<div class="word">Word</div>
+				</div>
+                <div class="tabbable">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li ng-class="{active: selectedTab == 1}">
+                            <a href="" ng-click="selectedTab = 1;">Dictionaire</a>
+                        </li>
+                        <li ng-class="{active: selectedTab == 2}">
+                            <a href="" ng-click="selectedTab = 2;">Exemple(s)</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" ng-show="selectedTab == 1">
+						<ul>
+							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.explanation}}</li>
+						</ul>
+						<div>常见用法</div>
+						<ul>
+							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.commonUsage}}</li>
+						</ul>
+                    </div>
+                    <div class="tab-content" ng-show="selectedTab == 2">
+						<div>例句</div>
+						<ul>
+							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.examples}}</li>
+						</ul>
+                    </div>
+                </div>
+			</div>
+			
+			
 		<br>
 		<br>
 		<br>

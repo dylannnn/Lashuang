@@ -22,10 +22,13 @@
 							<div class="ajaxResultWrapper" ng-show="searchWord.length">
 								<ul class="ajaxResultList">
                                     <li class="ajaxResult" ng-repeat="dict in dictionary | searchFor:searchWord">
-										<a class="item" href=''><span class="text">{{dict.word}}</span></a>
+										<a class="item" href="#"><span class="text" data="{{dict.word}}">{{dict.word}}</span></a>
 									</li>
 								</ul>
-                                <div class='ajaxResult loading' ng-hide="resultItems">
+								<div class="ajaxResult" ng-hide='searchExist'>
+									<span class="item"><span class="text">Not exist! Try another one.</span></span>
+								</div>
+                                <div class='ajaxResult loading' ng-hide="resultItems || searchExist">
                                     <span class='fa fa-spinner fa-pulse'></span>
                                 </div>
 							</div>

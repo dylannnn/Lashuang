@@ -2,8 +2,12 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
     
     //initial function running
     pageLoad.iniFunc();
+	
     $scope.needSearchWord = false;
 	$scope.enterPressed = false;
+	$scope.searchExist = false;
+	
+	
     //Get input fileds value
     $scope.checkInput = function () {
 
@@ -16,6 +20,7 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
 		console.log("$scope.searchWordLength is " + $scope.searchWordLength);
 		console.log("$scope.resultItems are " + $scope.resultItems);
 		if ($scope.searchWordLength == 0 && $scope.enterPressed) {
+			$scope.enterPressed = false;
 			$scope.needSearchWord = true;
 		} else {
 			$scope.needSearchWord = false;
@@ -31,13 +36,15 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
 			$scope.needSearchWord = false;
 			$location.path('/dict/').search({q: $scope.searchWord});
 		}
-	}
+	};
 	
 	//Image Upload function
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
+	
 	$scope.log = '';
+	
     $scope.upload = function (files) {
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {

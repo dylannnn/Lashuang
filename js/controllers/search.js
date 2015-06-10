@@ -1,6 +1,10 @@
-app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
+app.controller("searchController", ["$scope", "$rootScope", "$location", "$route", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, $route, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
     //initial function running
     pageLoad.iniFunc();
+	console.dir($route.current.params);
+	
+	
+	
     
     $scope.selectedTab = 1;
 	
@@ -14,7 +18,7 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBA
 		return vars;
 	}
 
-	//$rootScope.queryWord = getQueryVal()["word"];
+	$rootScope.queryWord = getQueryVal()["q"];
 	//console.log(queryWord);
 	
 	$rootScope.found = false;
@@ -27,7 +31,7 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBA
 			console.log("Data length: " + data.length);
 			console.dir(data);
 			
-			$rootScope.queryWord = getQueryVal()["word"];
+			$rootScope.queryWord = getQueryVal()["q"];
 			
 			var words = [];
 			for (var i = 0; i < data.length; i++) {
@@ -53,7 +57,9 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBA
 		var ref = new Firebase(FIREBASE_URL + "dictionary");
         $scope.loadDictionary = $firebaseArray(ref);
 	}
+			
 	console.log("3. $rootScope.found is " + $rootScope.found);
+			
 	if ($rootScope.found) {
 		console.log("Founded");
 		loadQueryWordContent ();
@@ -171,7 +177,6 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "FIREBA
 					//globalData.searchable = true;
                     //globalData.uploadedImageName = config.file.name;
                     //console.log("globalData.uploadedImageName is " +  globalData.uploadedImageName );
-					
                 });
             }
         }
