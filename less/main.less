@@ -121,77 +121,6 @@ a {
 		}
 	}
 }
-/*Live Search*/
-#liveSearch {
-    width: 100%;
-    margin: 0 auto;
-    display: inline-block;
-    max-width: 260px;
-    input{}
-    .searchIcon {
-//        display: inline-block;
-        position: absolute;
-        margin-left: 13px;
-        margin-top: 6px;
-        .icon {
-            color: lighten(#333,50%);
-            &.focus {
-                color:#333;
-            }
-            &.clear {
-                cursor: pointer;
-            }
-        }
-    }
-    .input {
-        width: 100%;
-        padding-left: 35px;
-        &.typed {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
-    .searchResultsWrapper {
-        background-color: #efefef;
-        padding: 10px 0;
-        position: absolute;
-        max-width: 260px;
-        ul.searchResults {
-            text-align: left;
-            
-            
-            height: 200px;
-            overflow: auto;
-            li.resultItem {
-                display: block;
-                a {
-                    color: #333;
-                    display: block;
-                    .text {
-                        display: block;
-                        margin:0 20px;
-                        padding: 5px 15px;
-                    }
-                    &:hover {
-                        text-decoration: none;
-                        background-color: darken(#efefef,10%);
-                    }
-                }
-            }
-            li.selected {
-                text-decoration: none;
-                background-color: darken(#efefef,10%);
-            }
-            li.loading {
-                margin:0 20px;
-                padding: 5px 15px;
-                &.hide {
-                    display: none;
-                }
-            }
-        }
-    }
-}
 
 .errmessage {margin: 10px 0}
 
@@ -282,6 +211,10 @@ a {
                             }
                         }
 					}
+                    .noResult {
+                        text-align: left;
+                        padding: 0 35px;
+                    }
                     div.ajaxResult.loading {
                         text-align: left;
                         margin: 10px 35px 0;
@@ -638,200 +571,66 @@ a {
     width: 100%;
     margin: 0 auto;
     background-color: white;
-    max-height: 500px;
     height: 100%;
-    min-height: 500px;
-    max-height: 600px;
+    min-height: 400px;
+    max-height: 420px;
     position: relative;
+    overflow: auto;
     .innerContent {
-        overflow: hidden;
-        .tabs {
-            margin: 44px 0 60px 44px;
-            height: 420px;
-            overflow: overlay;
-			&.moz {
-				overflow: auto;
-				.tabpanel {
-					margin-right: 9px;
-					.tab-content {
-						.tab-pane {
-							.dictContent {
-								.explanationWrapper {
-									.addModule {
-										.exp {
-											margin-left: 5px;
-											margin-right: 5px;
-											.text {
-												&.sel {
-												}
-												&.addExp {
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-            .tabpanel {
-				margin-right: 40px;
-                .title {
+        padding: 20px 40px;
+        .addWrapper {
+            .wordWrapper {
+                input {
+                    border-style: dashed;
+                    box-shadow: none;
+                    font-size: 32px;
+                    height:inherit;
                 }
-                .word {
-                    background-color:   lightgray;
-                    position: relative;
-					border-left: 5px solid gray;
-					border-right: 1px solid gray;
-                    input {
-                        padding: 3px 20px;
-                        &:focus {
-                            outline: -webkit-focus-ring-color auto 0px;
-                        }
-                        background-color: transparent;
-                        border: none;
-                        border-right: 1px solid gray;
-                        font-size: 60px;
-                        width: 89%;
-                        font-weight: bold;
-                    }
-                    span.icon {
-                        font-size: 30px;
-                        height: 90px;
-						position: absolute;
-						margin-top: 33px;
-						margin-left: 21px;
-						cursor: pointer;
-                    }
-                }
-                ul.nav {
-                    margin-top: 15px;
-                    li[role="presentation"] {
-                        a {
-                            padding: 5px 10px;
-                            font-size: 13px;
+            }
+            .dictWrapper {
+                a.add {
+                    cursor: not-allowed;
+                    &:hover {
+                        span {
+                            color: #555;
                         }
                     }
+                    &.active {
+                        cursor: pointer;
+                        background-color: #5cb85c;
+                        span {color: white}
+                    }
                 }
-				.tab-content {
-					/*Add Module Style*/
-					.addModule {
-						background-color: #efefef;
-						a.add { 
-							background-color: #3498DB;
-							border-radius: 0;
-							color: white;
-						}
-						.template {
-							display: inline-block;
-							vertical-align: middle;
-							margin-left: 5px;
-							margin-right: 5px;
-							div {
-								display: inline-block;
-								&.text {
-									margin-right: 5px;
-								}
-							}
-							input {
-								padding: 0 8px;
-								max-width: 160px;
-								width: 100%;
-							}
-							&.exp {
-								.text {
-									&.sel {
-									}
-									&.addExp {
-										margin-left: 8px;
-									}
-								}
-							}
-							&.comusage {
-							
-							}
-						}
-						a.submit {
-							background-color: #2ECC71;
-							border-radius: 0;
-							color: white;
-							width: 18%;
-							min-width: 40px;
-							max-width: 65px;
-							float: right;
-						}
-					}
-					/*END*/
-					margin-top: 20px;
-					.tab-pane {
-						.dictContent {
-							/*Global ul style*/
-							ul {
-								margin: 20px 40px;
-							}
-							.newContent {
-								margin: 20px 40px;
-							}
-							.explanationWrapper {
-								ul.explanationList {
-									margin: 0;
-									ul {
-										margin: 0 40px;
-									}
-								}
-								.commonUsage {
-									.tetle {
-									}
-									.contents {
-										ul {
-											margin: 0 40px;
-										}
-									}
-								}
-							}
-							.exampleWrapper {
-								.addModule {}
-								ul.exampleList {
-								
-								}
-							}
-							.conjugaisonWrapper {
-								ul.conjugaisonList {
-									margin: 20px 0 0;
-								}
-							}
-						}
-					}
-				}
+                ul.listGroup {
+                    padding: 20px 30px;
+                    .list {
+                        
+                    }
+                }
+                .dict {
+                    
+                }
+                .example {
+                    
+                }
             }
         }
-        .funcBtn  {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            margin-bottom: 17px;
-            a {
-                color: white;
-                padding: 2px 0;
-                width: 80px;
-                &.save {
-                    background-color: #00BF9D;
-                    margin-left: 20px;
-					.transition (background-color);
-                    &:hover {
-                        background-color: darken(#00BF9D,8%);
-						.transition (background-color);
-                    }
+        .submit {
+            margin-top: 20px;
+        }
+        .curWrapper {
+            margin-top: 60px;
+            border-top: 1px dashed #ccc;
+            li {
+                width: 20%;
+                display: inline-block;
+                margin: 5px 0;
+                padding: 0 15px;
+                span.btn {
+                    float: right;
                 }
-                &.cancel {
-                    background-color: #EB4C37;
-                    margin-left: 30px;
-					.transition (background-color);
-                    &:hover {
-                        background-color: darken(#EB4C37,8%);
-						.transition (background-color);
-                    }
+                &:last-child {
+                    margin-right: 0;
                 }
             }
         }

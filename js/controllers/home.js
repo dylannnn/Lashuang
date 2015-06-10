@@ -16,9 +16,10 @@ app.controller("homeController", ["$scope", "$rootScope", "$location", "FIREBASE
         //Add query function !!!
         
         $scope.searchWordLength = $('input.input').val().length;
-        $scope.resultItems = $('.ajaxResultList li').length;
+        $scope.resultItems = $('.ajaxResultList li').length;//not in use
 		console.log("$scope.searchWordLength is " + $scope.searchWordLength);
 		console.log("$scope.resultItems are " + $scope.resultItems);
+        
 		if ($scope.searchWordLength == 0 && $scope.enterPressed) {
 			$scope.enterPressed = false;
 			$scope.needSearchWord = true;

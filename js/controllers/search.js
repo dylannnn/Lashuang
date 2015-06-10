@@ -94,6 +94,68 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
             }
         });
     };
+    
+    $scope._newWordExp = {};
+    $scope._newWordExp.data = [];
+    
+    $scope.addItemOne = function (index) {
+        $scope.items = $scope._newWordExp;
+        $scope._newWordExp.data.push({
+            word: $scope.word.newWordExp
+        });
+        console.dir($scope._newWordExp);
+        $scope.word.newWordExp = '';
+    };
+    
+    $scope._newWordCommonUsage = {};
+    $scope._newWordCommonUsage.data = [];
+    
+    $scope.addItemTwo = function (index) {
+        $scope.items = $scope._newWordCommonUsage;
+        $scope._newWordCommonUsage.data.push({
+            word: $scope.word.newWordCommonUsage
+        });
+        console.dir($scope._newWordCommonUsage);
+    };
+    
+    $scope._newWordExamples = {};
+    $scope._newWordExamples.data = [];
+    
+    $scope.addItemThree = function (index) {
+        $scope.items = $scope._newWordExamples;
+        $scope._newWordExamples.data.push({
+            word: $scope.word.newWordExamples
+        });
+        console.dir($scope._newWordExamples);
+    };
+    
+    $scope.addNewWord = function () {
+        console.log("!!!!! Clicked!");
+        var ref = new Firebase(FIREBASE_URL);
+        var dictionary = ref.child('dictionary');
+
+        //var dictContent = 
+        dictionary.push({
+            word : $scope.word.newWord,
+			dictContent : {
+				explanation : [$scope.word.newWordExp],
+				commonUsage : [$scope.word.newWordCommonUsage],
+				examples : [$scope.word.newWordExamples]
+			}
+        }, function (error) {
+            if (error) {
+                console.log('Push failed');
+            } else {
+                console.log('Push Successed');
+            }
+        });
+    };
+	
+    
+    
+    
+    
+    
     $scope.clearInput = function () {
         $('.newWordInput').val('');
         $('.submitNewWordInput').attr("disabled", "disabled");

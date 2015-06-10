@@ -146,70 +146,55 @@
 <div id="popup" class="popupWrapper">
     <div id="addNewWord" class="addNewWordWrapper noneDisplay">
         <div class="innerContent">
-			<div class="input-group">
-				<span class="input-group-addon">Add new Word</span>
-				<input type="text" class="form-control" placeholder="New Word" ng-model="word.newWord">
-			</div>
-			<div class="input-group">
-				<span class="input-group-addon">Add Explanation</span>
-				<input type="text" class="form-control" placeholder="Add explanation" ng-model="word.newWordExp">
-				<a class="input-group-addon "><span class="fa fa-plus"></span></a>
-			</div>
-			<div class="input-group">
-				<span class="input-group-addon">Add Common Usage</span>
-				<input type="text" class="form-control" placeholder="Add Common Usage" ng-model="word.newWordCommonUsage">
-				<a class="input-group-addon"><span class="fa fa-plus"></span></a>
-			</div>
-			<div class="input-group">
-				<span class="input-group-addon">Add Example(s)</span>
-				<input type="text" class="form-control" placeholder="Add example(s)" ng-model="word.newWordExamples">
-				<a class="input-group-addon"><span class="fa fa-plus"></span></a>
-			</div>
-			<div class="btn btn-info" ng-click="addNewWord()">Submit</div>
-			
-			
-			
 			<div class="addWrapper">
+                <h1>Live Editor</h1>
 				<div class="wordWrapper">
-					<div class="word">Word</div>
+                    <input type="text" class="form-control" placeholder="Add New Word" ng-model="word.newWord">
 				</div>
-                <div class="tabbable">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li ng-class="{active: selectedTab == 1}">
-                            <a href="" ng-click="selectedTab = 1;">Dictionaire</a>
-                        </li>
-                        <li ng-class="{active: selectedTab == 2}">
-                            <a href="" ng-click="selectedTab = 2;">Exemple(s)</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" ng-show="selectedTab == 1">
-						<ul>
-							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.explanation}}</li>
+                <div class="dictWrapper">
+                    <div class="dict">
+                        <h3>Dictionaire</h3>
+                        <div class="input-group">
+                            <a class="input-group-addon add" ng-class=" word.newWordExp ? 'active' : ''" ng-click="addItemOne()"><span class="fa fa-plus"></span></a>
+                            <input type="text" class="form-control exp" placeholder="Add explanation" ng-model="word.newWordExp">
+                        </div>
+                        <ul class="listGroup" ng-show="_newWordExp.data">
+							<li class="list" ng-repeat="item in _newWordExp.data">{{item.word}}</li>
 						</ul>
-						<div>常见用法</div>
-						<ul>
-							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.commonUsage}}</li>
+						<h3>常见用法</h3>
+                        <div class="input-group">
+                            <a class="input-group-addon add" ng-class=" word.newWordCommonUsage ? 'active' : ''" ng-click="addItemTwo()"><span class="fa fa-plus"></span></a>
+                            <input type="text" class="form-control comUsage" placeholder="Add Common Usage" ng-model="word.newWordCommonUsage">
+                        </div>
+						<ul class="listGroup" ng-show="_newWordCommonUsage.data">
+							<li class="list" ng-repeat="item in _newWordCommonUsage.data">{{item.word}}</li>
 						</ul>
                     </div>
-                    <div class="tab-content" ng-show="selectedTab == 2">
-						<div>例句</div>
-						<ul>
-							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.examples}}</li>
+                    <div class="example">
+                        <h3>Exemple(s)</h3>
+                        <div class="input-group">
+                            <a class="input-group-addon add" ng-class=" word.newWordExamples ? 'active' : ''"  ng-click="addItemThree()"><span class="fa fa-plus"></span></a>
+                            <input type="text" class="form-control example" placeholder="Add example(s)" ng-model="word.newWordExamples">
+                        </div>
+						<ul class="listGroup" ng-show="_newWordExamples.data">
+							<li class="list" ng-repeat="item in _newWordExamples.data">{{item.word}}</li>
 						</ul>
                     </div>
                 </div>
 			</div>
-			
-			
-		<br>
-		<br>
-		<br>
-		<h3>Current word library</h3>
-            
-            <div ng-repeat=" (key,dict) in requestDictionary">
-                <div>{{dict.word}} <span class="btn btn-danger btn-xs" ng-click="deleteWord(key)">Delete ? </span></div>
-          
+            <div class="btn btn-info submit" ng-click="addNewWord()">Submit</div>
+            <div class="curWrapper">
+                <h3>Current word library</h3>
+                <ul class="curList">
+                    <li ng-repeat=" (key,dict) in requestDictionary">
+                        <div>
+                            <span>{{dict.word}}</span>
+                            <span class="btn btn-danger btn-xs" ng-click="deleteWord(key)">
+                                <span class="fa fa-close"></span>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div id="search" class="row RespRow" ngf-drop ng-model="files" class="drop-box" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'image/*'"  ngf-hide-on-drop-not-available="true">
+<div id="search" class="row RespRow drop-box" ngf-drop ng-model="files" ngf-drag-over-class="dragover" ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'image/*'"  ngf-hide-on-drop-not-available="true">
 	<section class="RespColsWrapper home">
 		<div class="RespCol">
 			<div id="identity">
@@ -25,9 +25,7 @@
 										<a class="item" href="#"><span class="text" data="{{dict.word}}">{{dict.word}}</span></a>
 									</li>
 								</ul>
-								<div class="ajaxResult" ng-hide='searchExist'>
-									<span class="item"><span class="text">Not exist! Try another one.</span></span>
-								</div>
+								<div class="noResult" ng-hide='searchExist'>Found Nothing! Try again.</div>
                                 <div class='ajaxResult loading' ng-hide="resultItems || searchExist">
                                     <span class='fa fa-spinner fa-pulse'></span>
                                 </div>
