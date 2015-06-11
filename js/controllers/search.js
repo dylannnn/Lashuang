@@ -95,50 +95,49 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
         });
     };
 	
-    $scope._newWordExp = {};
-    $scope._newWordExp.data = [];
+    $scope._newWordExp = [];
     
     $scope.addItemOne = function (index) {
         //$scope.itemOne = $scope._newWordExp;
-        $scope._newWordExp.data.push({
+        $scope._newWordExp.push({
             word: $scope.word.newWordExp
         });
         console.dir($scope._newWordExp);
         $scope.word.newWordExp = '';
     };
     $scope.deleteItemOne = function ($index) {
-		$scope._newWordExp.data.splice($index, 1); 
+		$scope._newWordExp.splice($index, 1); 
 	};
 	
 	
-    $scope._newWordCommonUsage = {};
-    $scope._newWordCommonUsage.data = [];
+    $scope._newWordCommonUsage = [];
+
     
     $scope.addItemTwo = function (index) {
         //$scope.itemTwo = $scope._newWordCommonUsage;
-        $scope._newWordCommonUsage.data.push({
+        $scope._newWordCommonUsage.push({
             word: $scope.word.newWordCommonUsage
         });
         console.dir($scope._newWordCommonUsage);
 		$scope.word.newWordCommonUsage = '';
     };
 	$scope.deleteItemTwo = function ($index) {
-		$scope._newWordCommonUsage.data.splice($index, 1); 
+		$scope._newWordCommonUsage.splice($index, 1); 
 	};
     
-    $scope._newWordExamples = {};
-    $scope._newWordExamples.data = [];
+    $scope._newWordExamples = [];
+
     
     $scope.addItemThree = function (index) {
         //$scope.itemThree = $scope._newWordExamples;
-        $scope._newWordExamples.data.push({
+        $scope._newWordExamples.push({
             word: $scope.word.newWordExamples
         });
         console.dir($scope._newWordExamples);
 		$scope.word.newWordExamples = '';
     };
     $scope.deleteItemThree = function ($index) {
-		$scope._newWordExamples.data.splice($index, 1); 
+		$scope._newWordExamples.splice($index, 1); 
 	};
 	
 	
@@ -152,9 +151,9 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
         dictionary.push({
             word : $scope.word.newWord,
 			dictContent : {
-				explanation : [$scope.word.newWordExp],
-				commonUsage : [$scope.word.newWordCommonUsage],
-				examples : [$scope.word.newWordExamples]
+				explanation : $scope._newWordExp,
+				commonUsage : $scope._newWordCommonUsage,
+				examples : $scope._newWordExamples
 			}
         }, function (error) {
             if (error) {

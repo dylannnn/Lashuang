@@ -637,8 +637,8 @@ a {
         }
 		button[disabled='disabled'] {
 			color: #555;
-			border-color:#EEE;
-			background-color: #EEEEEE;
+			border-color:#ccc;
+			background-color: #ccc;
 			transition: all 0.3s;
 		}
         .submit {
@@ -648,7 +648,7 @@ a {
             margin-top: 60px;
             border-top: 1px dashed #ccc;
             li {
-                width: 20%;
+                min-width: 20%;
                 display: inline-block;
                 margin: 5px 0;
                 padding: 0 15px;
@@ -659,6 +659,7 @@ a {
 				}
                 span.btn {
                     float: right;
+                    margin-left: 10px;
                 }
                 &:last-child {
                     margin-right: 0;
