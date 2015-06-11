@@ -579,11 +579,20 @@ a {
     .innerContent {
         padding: 20px 40px;
         .addWrapper {
+			h1 {
+				display: inline-block;
+			}
+			.err {
+				display: inline-block;
+				color: lighten(#555,30%);
+				margin-left: 20px;
+			}
             .wordWrapper {
                 input {
                     border-style: dashed;
                     box-shadow: none;
                     font-size: 32px;
+					font-weight: bold;
                     height:inherit;
                 }
             }
@@ -602,9 +611,20 @@ a {
                     }
                 }
                 ul.listGroup {
-                    padding: 20px 30px;
+					margin: 15px 0;
+                    padding: 5px 10px;
+					border: 1px dashed #ccc;
+					border-radius: 4px;
                     .list {
-                        
+                        margin-left: 20px;
+						padding: 5px 0;
+						border-bottom: 1px dashed #ccc;
+						span {
+							float: right;
+						}
+						&:last-child {
+							border-bottom-color: transparent
+						}
                     }
                 }
                 .dict {
@@ -615,6 +635,12 @@ a {
                 }
             }
         }
+		button[disabled='disabled'] {
+			color: #555;
+			border-color:#EEE;
+			background-color: #EEEEEE;
+			transition: all 0.3s;
+		}
         .submit {
             margin-top: 20px;
         }
@@ -626,6 +652,11 @@ a {
                 display: inline-block;
                 margin: 5px 0;
                 padding: 0 15px;
+				.currentItem {
+					border: 1px dashed #ccc;
+					padding: 5px 10px;
+					border-radius: 4px;
+				}
                 span.btn {
                     float: right;
                 }
