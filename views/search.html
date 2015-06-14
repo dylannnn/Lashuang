@@ -68,7 +68,7 @@
 						</li>
 					</ul>
 					<div class="more">
-						<a href="" class="btn moreBtn"><span class="icon fa fa-ellipsis-v"></span><span class="text">Charger plus</span></a>
+						<a href="#addNewWord" class="btn moreBtn popup"><span class="icon fa fa-ellipsis-v"></span><span class="text">Charger plus</span></a>
 					</div>
 					<div class="sidebarText">vous pouvais créer des nouveaux ici.</div>
 					<a href="" class="btn addNewWord" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image."><span class="text"><i class="icon fa fa-plus"></i>Ajouter</span></a>
@@ -160,7 +160,7 @@
                             <input type="text" class="form-control exp" autocomplete="off" placeholder="Add explanation" ng-model="word.newWordExp" ng-enter="addItemOne()">
                         </div>
                         <ul class="listGroup" ng-show="_newWordExp.length > 0">
-							<li class="list" ng-repeat="item in _newWordExp track by $index">{{item.word}}
+							<li class="list" ng-repeat="item in _newWordExp track by $index">{{item.content}}
 								<span class="btn btn-danger btn-xs" ng-click="deleteItemOne($index)">
 									<span class="fa fa-close"></span>
 								</span>
@@ -172,7 +172,7 @@
                             <input type="text" class="form-control comUsage" autocomplete="off" placeholder="Add Common Usage" ng-model="word.newWordCommonUsage" ng-enter="addItemTwo()">
                         </div>
 						<ul class="listGroup" ng-show="_newWordCommonUsage.length > 0">
-							<li class="list" ng-repeat="item in _newWordCommonUsage track by $index">{{item.word}}
+							<li class="list" ng-repeat="item in _newWordCommonUsage track by $index">{{item.content}}
 								<span class="btn btn-danger btn-xs" ng-click="deleteItemTwo($index)">
 									<span class="fa fa-close"></span>
 								</span>
@@ -186,7 +186,7 @@
                             <input type="text" class="form-control example" autocomplete="off" placeholder="Add example(s)" ng-model="word.newWordExamples" ng-enter="addItemThree()">
                         </div>
 						<ul class="listGroup" ng-show="_newWordExamples.length > 0">
-							<li class="list" ng-repeat="item in _newWordExamples track by $index">{{item.word}}
+							<li class="list" ng-repeat="item in _newWordExamples track by $index">{{item.content}}
 								<span class="btn btn-danger btn-xs" ng-click="deleteItemThree($index)">
 									<span class="fa fa-close"></span>
 								</span>
@@ -196,6 +196,7 @@
                 </div>
 			</div>
             <button class="btn btn-info submit" ng-disabled="(_newWordExp.length == 0) || (_newWordCommonUsage.length == 0) || (_newWordExamples.length == 0)" ng-click="addNewWord()">Submit</button>
+            <button class="btn btn-info cancel" ng-click="clearInput()">Cancel</button>
             <div class="curWrapper">
                 <h3>Current word library</h3>
                 <ul class="curList">
