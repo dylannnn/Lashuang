@@ -23,18 +23,21 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 	$rootScope.found = false;
 //===============================================
 	console.log("1. $rootScope.found is " + $rootScope.found);//false
-    
     //Search Word function. 
 	function searchWord () {
         //Connect to firebase
 		var ref = new Firebase(FIREBASE_URL + "dictionary");
         var dictionary = $firebaseArray(ref);
 		
+		$scope.catalogueDict = $firebaseArray(ref);
+		
         //Callback function. After loaded, then run this.
 		dictionary.$loaded().then(function(data) {
             
 			console.log("Data length: " + data.length);
 			console.dir(data);
+			
+			$scope._limitNo = data.length;
 			
 			$rootScope.queryWord = getQueryVal()["q"];
 			
@@ -49,6 +52,7 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 			if (words.indexOf($rootScope.queryWord) != -1) {
                 //if found
 				$rootScope.found = true;
+				
 				console.log("2. $rootScope.found is " + $rootScope.found);
                 
                 //???
@@ -58,31 +62,46 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 				$rootScope.found = false;
 			}
 			
-			
-				
+			if ($rootScope.found) {
+				console.log("Founded");
+				loadQueryWordContent ();
+			}		
+		});
+	}
+	searchWord ();
 	//search. For in loop
 	function loadQueryWordContent () {
 		console.log("Loading...");
 		var ref = new Firebase(FIREBASE_URL + "dictionary");
         $scope.loadDictionary = $firebaseArray(ref);
-	}
-			
-	console.log("3. $rootScope.found is " + $rootScope.found);
-			
-	if ($rootScope.found) {
-		console.log("Founded");
-		loadQueryWordContent ();
-	}
-			
-			
-			
-			
+		
+		$scope.loadDictionary.$loaded().then(function(data) {
+			$scope.thisDictExp = [];
+			$scope.thisDictCommonUsage = [];
+			$scope.thisExem = [];
+			for (var i = 0; i <= data.length; i++) {
+				$scope.thisDictExp.push(data[i].dictContent.explanation[i].content);
+				console.log("Test comming!!!!");
+				console.dir($scope.thisDictExp);
+			}
 		});
 	}
-	searchWord ();
 	
-    
-    
+//	$scope.catalogueDict.$loaded().then(function (data) {
+//		for (var i = 0; i <= data.length; i ++) {
+//			if (data[i].word.indexOf($rootScope.queryWord) != -1) {
+//				
+//			}
+//		}
+//	});
+	$scope.limitNoFunc = function () {
+		$scope.limitNo = $scope.limitNo + 5
+		if ($scope.limitNo >= $scope._limitNo) {
+			$scope.limitNo = $scope._limitNo;
+		}
+	}
+    //Load all vocabulary to Catalogue in the dict page view and add "active" class if the item match the query item
+    //$scope.limitNo <= _limitNo;
     //Add New Word
 //    $('.successAdded').hide();
 //    $scope.addWord = function () {

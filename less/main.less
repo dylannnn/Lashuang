@@ -412,6 +412,9 @@ a {
 		.catalogueContent {
 			ul.wordList {
                 -webkit-padding-start: 0;
+				max-height: 300px;
+				overflow-y: auto;
+				overflow-x: hidden;
 				li.word {
                     display: block;
                     padding: 3px 0;
@@ -641,7 +644,7 @@ a {
 			background-color: #ccc;
 			transition: all 0.3s;
 		}
-        .submit {
+        .submit, .cancel {
             margin-top: 20px;
         }
         .curWrapper {

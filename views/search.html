@@ -63,15 +63,15 @@
 				<h3 class="title">Catalogue:</h3>
 				<div class="catalogueContent">
 					<ul class="wordList">
-						<li class="word" ng-repeat="dict in dict | searchFor:searchWord:strict">
+						<li class="word" ng-repeat="dict in catalogueDict | limitTo: limitNo:0">
 							<a href=""><span class="text">{{dict.word}}</span></a>
 						</li>
 					</ul>
 					<div class="more">
-						<a href="#addNewWord" class="btn moreBtn popup"><span class="icon fa fa-ellipsis-v"></span><span class="text">Charger plus</span></a>
+						<div class="btn moreBtn" ng-click="limitNoFunc()" ng-init="limitNo = 5" ><span class="icon fa fa-ellipsis-v"></span><span class="text">Charger plus</span></div>
 					</div>
 					<div class="sidebarText">vous pouvais créer des nouveaux ici.</div>
-					<a href="" class="btn addNewWord" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image."><span class="text"><i class="icon fa fa-plus"></i>Ajouter</span></a>
+					<a href="#addNewWord" class="btn addNewWord popup" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image."><span class="text"><i class="icon fa fa-plus"></i>Ajouter</span></a>
 				</div>
 			</div>
 		</div>
@@ -88,9 +88,6 @@
 								<a href="#addNewWord" class="btn addNewWord popup" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image.">
 									<span class="text"><i class="icon fa fa-plus"></i>Ajouter</span>
 								</a>
-								
-								<!--<a class="btn" ng-click="requestAdd='true'">Add</a>-->
-								
 							</div>
 						</div>
 					</div>
