@@ -12,7 +12,7 @@
 			</div>
 			<div id="searchWrapper" class="searchInputWrapper">   
 				<form class="searchForm" name="mainSearch" ng-submit="mySearch()" novalidate autocomplete="off">
-					<div class="searchInput small">
+					<div class="searchInput small" ng-show="">
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
 						<div class="inputWrapper">
@@ -29,7 +29,7 @@
 							</div>
 						</div>
 					</div>
-					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start">
+					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start" ng-show="">
                         <span class="icon fa fa-camera"></span>
                     </div>
                     <div class="progress uploadProgress" ng-show="progressBar">
@@ -92,7 +92,7 @@
 						</div>
 					</div>
 				</div>
-                <div class="tabbable">
+                <div class="tabbable" ng-show="thisDictExp.length>=1">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li ng-class="{active: selectedTab == 1}">
@@ -103,23 +103,25 @@
                         </li>
                     </ul>
                     <div class="tab-content" ng-show="selectedTab == 1">
-						<ul>
-							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.explanation}}</li>
+						<ul class="unOrderList">
+							<li class="item" ng-repeat="exp in thisDictExp">{{exp.content}}</li>
 						</ul>
-						<div>常见用法</div>
-						<ul>
-							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.commonUsage}}</li>
-						</ul>
+                        <div class="commonUsage">
+                            <h4>常见用法</h4>
+                            <ol class="orderList">
+                                <li class="item" ng-repeat="comUsage in thisDictCommonUsage">{{comUsage.content}}</li>
+                            </ol>
+                        </div>
                     </div>
                     <div class="tab-content" ng-show="selectedTab == 2">
-						<div>例句</div>
-						<ul>
-							<li ng-repeat="dict in loadDictionary">{{dict.dictContent.examples}}</li>
-						</ul>
+						<h4>例句</h4>
+						<ol class="orderList">
+							<li class="item" ng-repeat="exem in thisExem">{{exem.content}}</li>
+						</ol>
                     </div>
                 </div>
 			</div>
-            <div class="editBtn">
+            <div class="editBtn" ng-show="">
                 <div class="btn edit">
                     <span class="icon fa fa-pencil"></span>Éditer
                 </div>
@@ -192,7 +194,7 @@
                     </div>
                 </div>
 			</div>
-            <button class="btn btn-info submit" ng-disabled="(_newWordExp.length == 0) || (_newWordCommonUsage.length == 0) || (_newWordExamples.length == 0)" ng-click="addNewWord()">Submit</button>
+            <button class="btn btn-success submit" ng-disabled="(_newWordExp.length == 0) || (_newWordCommonUsage.length == 0) || (_newWordExamples.length == 0)" ng-click="addNewWord()">Submit</button>
             <button class="btn btn-info cancel" ng-click="clearInput()">Cancel</button>
             <div class="curWrapper">
                 <h3>Current word library</h3>

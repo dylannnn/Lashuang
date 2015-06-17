@@ -57,33 +57,37 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
                 
                 //???
 				$scope.searchedWord = $rootScope.queryWord;
+                
+                $scope.wordIndex = words.indexOf($rootScope.queryWord);
 				
 			} else {
 				$rootScope.found = false;
+                //$scope.wordIndex = words.indexOf($rootScope.queryWord);
 			}
 			
 			if ($rootScope.found) {
 				console.log("Founded");
-				loadQueryWordContent ();
+				loadQueryWordContent ($scope.wordIndex);
 			}		
 		});
 	}
 	searchWord ();
 	//search. For in loop
-	function loadQueryWordContent () {
+	function loadQueryWordContent (wordIndex) {
 		console.log("Loading...");
 		var ref = new Firebase(FIREBASE_URL + "dictionary");
         $scope.loadDictionary = $firebaseArray(ref);
 		
 		$scope.loadDictionary.$loaded().then(function(data) {
-			$scope.thisDictExp = [];
-			$scope.thisDictCommonUsage = [];
-			$scope.thisExem = [];
-			for (var i = 0; i <= data.length; i++) {
-				$scope.thisDictExp.push(data[i].dictContent.explanation[i].content);
-				console.log("Test comming!!!!");
-				console.dir($scope.thisDictExp);
-			}
+            
+            console.dir(data[wordIndex].dictContent);
+            $scope.thisDictContent = data[wordIndex].dictContent;
+            $scope.thisDictExp = $scope.thisDictContent.explanation;
+			$scope.thisDictCommonUsage = $scope.thisDictContent.commonUsage;
+			$scope.thisExem = $scope.thisDictContent.examples;
+            console.dir($scope.thisDictExp);
+            console.dir($scope.thisDictCommonUsage);
+            console.dir($scope.thisExem);
 		});
 	}
 	
