@@ -490,6 +490,19 @@ a {
 					display: inline-block;
 					word-break: break-all;
 					line-height: 1.1em;
+					.wordNoExpWrapper {
+						font-size: 18px;
+						color: lighten(#333,50%);
+						font-weight: normal;
+						.quote {
+							font-size: 30px;
+							color: lighten(#333,40%);
+						}
+						.quoteWord {
+							font-weight: bold;
+							color: lighten(#333,40%);
+						}
+					}
 				}
 				.subTitle {
 					display: inline-block;
@@ -639,16 +652,37 @@ a {
                         margin-left: 20px;
 						padding: 5px 0;
 						border-bottom: 1px dashed #ccc;
-						span {
+						list-style: none;
+						span.btn {
 							float: right;
 						}
 						&:last-child {
 							border-bottom-color: transparent
 						}
+						ul.explanation {
+							margin-left: 40px;
+							margin-top: 10px;
+							list-style-type: disc;
+						}
+						span.pos {
+							font-weight: bold;
+						}
                     }
                 }
                 .dict {
-                    
+					.input-group {
+						.input-group-select {
+							padding: 6px 12px;
+							border-radius: 0;
+							border: 1px solid #ccc;
+							float: left;
+							border-right: 0;
+						}
+						input.exp {
+							max-width: 440px;
+							height: 35px;
+						}
+					}
                 }
                 .example {
                     
@@ -661,7 +695,7 @@ a {
 			background-color: #ccc;
 			transition: all 0.3s;
 		}
-        .submit, .cancel {
+        .submit {
             margin-top: 20px;
             margin-right: 20px;
         }

@@ -12,7 +12,7 @@
 			</div>
 			<div id="searchWrapper" class="searchInputWrapper">   
 				<form class="searchForm" name="mainSearch" ng-submit="mySearch()" novalidate autocomplete="off">
-					<div class="searchInput small" ng-show="">
+					<div class="searchInput small">
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-search search"></span></div>
 						<div class="searchIcon" for="filter-by"><span class="icon fa fa-times clear hide"></span></div>
 						<div class="inputWrapper">
@@ -29,7 +29,7 @@
 							</div>
 						</div>
 					</div>
-					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start" ng-show="">
+					<div ngf-select ng-model="files" class="btn lg upload" data-toggle="tooltip" data-placement="top" title="Shot or Upload an image to start">
                         <span class="icon fa fa-camera"></span>
                     </div>
                     <div class="progress uploadProgress" ng-show="progressBar">
@@ -81,7 +81,17 @@
 			<div class="wordInterpretation">
 				<div class="topBar">
 					<div class="wordWrapper">
-						<div class="word" ng-repeat="dict in loadDictionary | searchFor:searchedWord">{{dict.word}}</div>
+						<div class="word" ng-repeat="dict in loadDictionary | searchFor:searchedWord">
+							{{dict.word}}
+							<span class="wordNoExpWrapper">
+								<span>(There is no explanation for <span class="quote">"</span><span class="quoteWord">{{dict.word}}</span><span class="quote">"</span> yet.</span>
+								<span class="btnWrapper">
+									<a href="#addNewWord" class="btn addNewWord popup" data-toggle="tooltip" data-placement="top" title="Add another possible word for this image.">
+										<span class="text"><i class="icon fa fa-plus"></i>Add/Edit</span>
+									</a>
+								</span>)
+							</span>
+						</div>
 						<div class="wordNotExist" ng-hide="found">
 							<div class="subTitle">n'existe pas, vous pouvez le créer ici.</div>
 							<div class="btnWrapper">
@@ -148,54 +158,65 @@
 			<div class="addWrapper">
                 <h1>Live Editor</h1>
 				<span class="err">(Please fill in every input fileds!)</span>
-				<div class="wordWrapper">
-                    <input type="text" class="form-control" autofocus placeholder="Add New Word" ng-model="word.newWord" required>
-				</div>
-                <div class="dictWrapper">
-                    <div class="dict">
-                        <h3>Dictionaire</h3>
-                        <div class="input-group">
-                            <a class="input-group-addon add" ng-class=" word.newWordExp ? 'active' : ''" ng-click="addItemOne()"><span class="fa fa-plus"></span></a>
-                            <input type="text" class="form-control exp" autocomplete="off" placeholder="Add explanation" ng-model="word.newWordExp" ng-enter="addItemOne()">
-                        </div>
-                        <ul class="listGroup" ng-show="_newWordExp.length > 0">
-							<li class="list" ng-repeat="item in _newWordExp track by $index">{{item.content}}
-								<span class="btn btn-danger btn-xs" ng-click="deleteItemOne($index)">
-									<span class="fa fa-close"></span>
-								</span>
-							</li>
-						</ul>
-						<h3>常见用法</h3>
-                        <div class="input-group">
-                            <a class="input-group-addon add" ng-class=" word.newWordCommonUsage ? 'active' : ''" ng-click="addItemTwo()"><span class="fa fa-plus"></span></a>
-                            <input type="text" class="form-control comUsage" autocomplete="off" placeholder="Add Common Usage" ng-model="word.newWordCommonUsage" ng-enter="addItemTwo()">
-                        </div>
-						<ul class="listGroup" ng-show="_newWordCommonUsage.length > 0">
-							<li class="list" ng-repeat="item in _newWordCommonUsage track by $index">{{item.content}}
-								<span class="btn btn-danger btn-xs" ng-click="deleteItemTwo($index)">
-									<span class="fa fa-close"></span>
-								</span>
-							</li>
-						</ul>
-                    </div>
-                    <div class="example">
-                        <h3>Exemple(s)</h3>
-                        <div class="input-group">
-                            <a class="input-group-addon add" ng-class=" word.newWordExamples ? 'active' : ''"  ng-click="addItemThree()"><span class="fa fa-plus"></span></a>
-                            <input type="text" class="form-control example" autocomplete="off" placeholder="Add example(s)" ng-model="word.newWordExamples" ng-enter="addItemThree()">
-                        </div>
-						<ul class="listGroup" ng-show="_newWordExamples.length > 0">
-							<li class="list" ng-repeat="item in _newWordExamples track by $index">{{item.content}}
-								<span class="btn btn-danger btn-xs" ng-click="deleteItemThree($index)">
-									<span class="fa fa-close"></span>
-								</span>
-							</li>
-						</ul>
-                    </div>
-                </div>
+				<form>
+					<div class="wordWrapper">
+						<input type="text" class="form-control" autofocus placeholder="Add New Word" ng-model="word.newWord" required>
+					</div>
+					<div class="dictWrapper">
+						<div class="dict">
+							<h3>Dictionaire</h3>
+							<div class="input-group">
+								<a class="input-group-addon add" ng-class=" word.newWordExp ? 'active' : ''" ng-click="addItemOne()"><span class="fa fa-plus"></span></a>
+								<select name="select" class="input-group-select" ng-options="key as key for (key , value) in pos" ng-model="word.pos" ng-change="addPos()">
+									<option value="">Choose a POS</option>
+<!--									<option ng-repeat="(key, value) in pos" value="{{key}}" ng-module="word.pos">{{key}}</option>-->
+								</select>
+								<input type="text" class="form-control exp" autocomplete="off" placeholder="Add explanation" ng-model="word.newWordExp"  ng-init="word.newWordExp=undefined" ng-enter="addItemOne()">
+							</div>
+							<ul class="listGroup" ng-show="word.pos">
+								<li class="list">
+									<span class="pos">{{word.pos}}</span>
+									<ul class="explanation">
+										<li class="item" ng-repeat="item in _newWordExp track by $index">{{item.content}}</li>
+									</ul>
+									<span class="btn btn-danger btn-xs" ng-click="deleteItemOne($index)">
+										<span class="fa fa-close"></span>
+									</span>
+								</li>
+							</ul>
+							<h3>常见用法</h3>
+							<div class="input-group">
+								<a class="input-group-addon add" ng-class=" word.newWordCommonUsage ? 'active' : ''" ng-click="addItemTwo()"><span class="fa fa-plus"></span></a>
+								<input type="text" class="form-control comUsage" autocomplete="off" placeholder="Add Common Usage" ng-model="word.newWordCommonUsage" ng-init="word.newWordCommonUsage=undefined" ng-enter="addItemTwo()">
+							</div>
+							<ul class="listGroup" ng-show="_newWordCommonUsage.length > 0">
+								<li class="list" ng-repeat="item in _newWordCommonUsage track by $index">{{item.content}}
+									<span class="btn btn-danger btn-xs" ng-click="deleteItemTwo($index)">
+										<span class="fa fa-close"></span>
+									</span>
+								</li>
+							</ul>
+						</div>
+						<div class="example">
+							<h3>Exemple(s)</h3>
+							<div class="input-group">
+								<a class="input-group-addon add" ng-class=" word.newWordExamples ? 'active' : ''"  ng-click="addItemThree()"><span class="fa fa-plus"></span></a>
+								<input type="text" class="form-control example" autocomplete="off" placeholder="Add example(s)" ng-model="word.newWordExamples" ng-init="word.newWordExamples=undefined" ng-enter="addItemThree()">
+							</div>
+							<ul class="listGroup" ng-show="_newWordExamples.length > 0">
+								<li class="list" ng-repeat="item in _newWordExamples track by $index">{{item.content}}
+									<span class="btn btn-danger btn-xs" ng-click="deleteItemThree($index)">
+										<span class="fa fa-close"></span>
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="formErr" ng-show="">Plese fill in something...</div>
+					<button class="btn btn-success submit" ng-disabled="!word.newWord" ng-click="addNewWord()">Submit</button>
+				</form>
 			</div>
-            <button class="btn btn-success submit" ng-disabled="(_newWordExp.length == 0) || (_newWordCommonUsage.length == 0) || (_newWordExamples.length == 0)" ng-click="addNewWord()">Submit</button>
-            <button class="btn btn-info cancel" ng-click="clearInput()">Cancel</button>
+			
             <div class="curWrapper">
                 <h3>Current word library</h3>
                 <ul class="curList">

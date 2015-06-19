@@ -1,4 +1,4 @@
-app.controller("searchController", ["$scope", "$rootScope", "$location", "$route", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, $route, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
+app.controller("searchController", ["$scope", "$rootScope", "$location", "$route", "$http", "FIREBASE_URL", "$firebaseArray", "pageLoad", "Upload", function ($scope, $rootScope, $location, $route, $http, FIREBASE_URL, $firebaseArray, pageLoad, Upload) {
     //initial function running
     pageLoad.iniFunc();
     
@@ -72,6 +72,8 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 		});
 	}
 	searchWord ();
+	
+	
 	//search. For in loop
 	function loadQueryWordContent (wordIndex) {
 		console.log("Loading...");
@@ -98,6 +100,8 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 //			}
 //		}
 //	});
+	
+	
 	$scope.limitNoFunc = function () {
 		$scope.limitNo = $scope.limitNo + 5
 		if ($scope.limitNo >= $scope._limitNo) {
@@ -130,19 +134,32 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 //    };
 //	
     // Put new word explanation to an array
+	$http.get("/data/pos.json").success(function(data) {$scope.pos = data;}).error(function() {console.log("Get JSON failed!")});
+	
     $scope._newWordExp = [];
-    
-    
+	
+    $scope._pos = [];
+	$scope.addPos = function () {
+		console.log("You selected something!");
+	}
+	
     $scope.addItemOne = function (index) {
         //$scope.itemOne = $scope._newWordExp;
-        $scope._newWordExp.push({
-            content: $scope.word.newWordExp
-        });
-        console.dir($scope._newWordExp);
-        $scope.word.newWordExp = '';
+		if ($scope.word.newWordExp) {
+			console.log("TRUE");
+			$scope._pos.push($scope.word.pos);
+			$scope._newWordExp.push({
+				content: $scope.word.newWordExp
+			});
+
+			console.dir($scope._newWordExp);
+			$scope.word.newWordExp = '';
+		} else {
+			console.log("FALSE");
+		}
     };
     $scope.deleteItemOne = function ($index) {
-		$scope._newWordExp.splice($index, 1); 
+		$scope._newWordExp.splice($index, 1);
 	};
 	
 	
@@ -151,14 +168,19 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
     
     $scope.addItemTwo = function (index) {
         //$scope.itemTwo = $scope._newWordCommonUsage;
-        $scope._newWordCommonUsage.push({
-            content: $scope.word.newWordCommonUsage
-        });
-        console.dir($scope._newWordCommonUsage);
-		$scope.word.newWordCommonUsage = '';
+		if ($scope.word.newWordCommonUsage) {
+			console.log("TRUE");
+			$scope._newWordCommonUsage.push({
+				content: $scope.word.newWordCommonUsage
+			});
+			console.dir($scope._newWordCommonUsage);
+			$scope.word.newWordCommonUsage = '';
+		} else {
+			console.log("FALSE");
+		}
     };
 	$scope.deleteItemTwo = function ($index) {
-		$scope._newWordCommonUsage.splice($index, 1); 
+		$scope._newWordCommonUsage.splice($index, 1);
 	};
     
     $scope._newWordExamples = [];
@@ -166,14 +188,19 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
     
     $scope.addItemThree = function (index) {
         //$scope.itemThree = $scope._newWordExamples;
-        $scope._newWordExamples.push({
-            content: $scope.word.newWordExamples
-        });
-        console.dir($scope._newWordExamples);
-		$scope.word.newWordExamples = '';
+		if ($scope.word.newWordExamples) {
+			console.log("TRUE");
+			$scope._newWordExamples.push({
+				content: $scope.word.newWordExamples
+			});
+			console.dir($scope._newWordExamples);
+			$scope.word.newWordExamples = '';
+		} else {
+			console.log("FALSE");
+		}
     };
     $scope.deleteItemThree = function ($index) {
-		$scope._newWordExamples.splice($index, 1); 
+		$scope._newWordExamples.splice($index, 1);
 	};
 	
 	
@@ -182,7 +209,21 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
         console.log("!!!!! Clicked!");
         var ref = new Firebase(FIREBASE_URL);
         var dictionary = ref.child('dictionary');
-
+		console.log($scope._newWordExp.length);
+		
+		
+		if ($scope._newWordExp.length == 0){
+			$scope._newWordExp = [{content:""}];
+		}
+		
+		if ($scope._newWordCommonUsage.length == 0){
+			$scope._newWordCommonUsage = [{content:""}];
+		}
+		
+		if ($scope._newWordExamples.length == 0){
+			$scope._newWordExamples = [{content:""}];
+		}
+		
         //var dictContent = 
         dictionary.push({
             word : $scope.word.newWord,
@@ -196,15 +237,17 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
                 console.log('Push failed');
             } else {
                 console.log('Push Successed');
+				$scope.clearAddNewWord();
             }
         });
     };
 	
+    $scope.clearAddNewWord = function () {
+		console.log("Running clearAddNewWord function");
+	}
     
     
-    
-    
-    
+
     $scope.clearInput = function () {
         $('.newWordInput').val('');
         $('.submitNewWordInput').attr("disabled", "disabled");
@@ -251,43 +294,38 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 
     };
     
-    //$('.uploadedImage, .uploadProgress').hide();
+
 	
+	
+    //Image Upload function
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
-    
+	
 	$scope.log = '';
 	
     $scope.upload = function (files) {
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
                 var file = files[i];
-                //globalData.uploadedImage = file;
-                //console.log("Images is " +  globalData.uploadedImage);
                 Upload.upload({
                     url: '../php/uploader.php',
                     file: file
                 }).progress(function (evt) {
-					//$('.uploadProgress').show();
-					
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     $scope.progressBar = progressPercentage;
-					
 					$('.uploadProgress .bar').css("width", progressPercentage +'%');
-					$scope.log = 'Progress: ' + progressPercentage + '%. ' + 'File: ' + evt.config.file.name;
-                    
+					$scope.log = 'Progress: ' + progressPercentage + '%'
                 }).success(function (data, status, headers, config) {
-                    //$scope.imageFile = files[0]; //Show Image
-                    console.log('file ' + config.file.name + " Data is " + data);
-                    $rootScope.imgFileName = config.file.name;
-                    $rootScope.imgFile = files[0];
-                    $location.path('/dict');
-                    //$('.uploadedImage, .uploadProgress').show();
-                    //$('.img').show();
-					//globalData.searchable = true;
-                    //globalData.uploadedImageName = config.file.name;
-                    //console.log("globalData.uploadedImageName is " +  globalData.uploadedImageName );
+                    
+                    var _fileName = config.file.name;
+                    var _fileNameArr = _fileName.split('.');
+                    
+                    $rootScope.upluadFileName = _fileNameArr[0];
+                    $rootScope.upluadFileFullName = _fileNameArr[0] + '.' + _fileNameArr[1]
+                    $rootScope.upluadFile = files[0];
+                    console.log("upluadFileName: " + $rootScope.upluadFileName + '; upluadFileFullName: ' + $rootScope.upluadFileFullName);
+					$location.path('/dict/').search({q: $rootScope.upluadFileName});
                 });
             }
         }
@@ -296,8 +334,53 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
     
     
     
-    
-    
+    // Magnific Popup
+	$('a.popup').magnificPopup({
+		type: 'inline',
+		midClick: true,
+		closeBtnInside: true,
+		closeOnBgClick: false,
+		closeOnContentClick: false,
+		mainClass: 'laPop mfp-fade',
+		removalDelay: 300,
+		fixedBgPos: true,
+		callbacks: {
+			open: function () {
+				// Will fire when this exact popup is opened
+				// this - is Magnific Popup object
+				//$scope.disableInput();
+			},
+			close: function () {
+				// Will fire when popup is closed
+				$("#addNewWord input,#addNewWord select").val("");
+				//$scope.word.newWordExp = '';
+			},
+			updateStatus: function (data) {
+				console.log('Status changed', data);
+				// "data" is an object that has two properties:
+				// "data.status" - current status type, can be "loading", "error", "ready"
+				// "data.text" - text that will be displayed (e.g. "Loading...")
+				// you may modify this properties to change current status or its text dynamically
+			},
+			parseAjax: function (mfpResponse) {
+				// mfpResponse.data is a "data" object from ajax "success" callback
+				// for simple HTML file, it will be just String
+				// You may modify it to change contents of the popup
+				// For example, to show just #some-element:
+				// mfpResponse.data = $(mfpResponse.data).find('#some-element');
+
+				// mfpResponse.data must be a String or a DOM (jQuery) element
+
+				console.log('Ajax content loaded:', mfpResponse);
+			},
+			ajaxContentAdded: function () {
+				// Ajax content is loaded and appended to DOM
+				console.log(this.content);
+			}
+		}
+	});
+	// END Magnific Popup
+
     
     
     

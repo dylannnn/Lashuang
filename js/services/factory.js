@@ -12,51 +12,7 @@ app.factory('pageLoad', function($firebase, $rootScope, $routeParams, $location,
             $('.input').on('focusout', function () {
                 $('.searchIcon .icon').removeClass('focus');
             });
-            // Magnific Popup
-            $('a.popup').magnificPopup({
-                type: 'inline',
-                midClick: true,
-                closeBtnInside: true,
-                closeOnBgClick: false,
-                closeOnContentClick: false,
-                mainClass: 'laPop mfp-fade',
-                removalDelay: 300,
-                fixedBgPos: true,
-                callbacks: {
-                    open: function () {
-                        // Will fire when this exact popup is opened
-                        // this - is Magnific Popup object
-                        //$scope.disableInput();
-                    },
-                    close: function () {
-                        // Will fire when popup is closed
-                        //$scope.clearInput();
-                    },
-                    updateStatus: function (data) {
-                        console.log('Status changed', data);
-                        // "data" is an object that has two properties:
-                        // "data.status" - current status type, can be "loading", "error", "ready"
-                        // "data.text" - text that will be displayed (e.g. "Loading...")
-                        // you may modify this properties to change current status or its text dynamically
-                    },
-                    parseAjax: function (mfpResponse) {
-                        // mfpResponse.data is a "data" object from ajax "success" callback
-                        // for simple HTML file, it will be just String
-                        // You may modify it to change contents of the popup
-                        // For example, to show just #some-element:
-                        // mfpResponse.data = $(mfpResponse.data).find('#some-element');
-
-                        // mfpResponse.data must be a String or a DOM (jQuery) element
-
-                        console.log('Ajax content loaded:', mfpResponse);
-                    },
-                    ajaxContentAdded: function () {
-                        // Ajax content is loaded and appended to DOM
-                        console.log(this.content);
-                    }
-                }
-            });
-            // END Magnific Popup
+            
         },
         isMobile : function () {
 			var isNotMobile = (function () {
