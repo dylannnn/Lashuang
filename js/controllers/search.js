@@ -156,34 +156,15 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
     }
 
     
-    $scope.addItemOne = function () {
-
-        
-        //$scope.itemOne = $scope._newWordExp;
+    $scope.addItemOne = function (index) {
+        //$scope.itemOne = $scope.newWordExp;
 		if ($scope.word.newWordExp) {
 			console.log("TRUE");
-            
-            
-            
-			//$scope._pos.push($scope.word.pos);
-            
-            $scope._newWordExp.push({
-                
-//				content: $scope.word.newWordExp[posItem.pos]
+			$scope._newWordExp.push({
+				content: $scope.word.newWordExp
 			});
-            
-            //$scope._pos.push({
-				//content: $scope.word.newWordExp
-			//});
-            
-            
-//			$scope._newWordExp[$index].push({
-//				content: $scope.word.newWordExp[$index]
-//			});
-
 			console.dir($scope._newWordExp);
-            console.dir($scope._pos);
-			//$scope.word.newWordExp = '';
+			$scope.word.newWordExp = '';
 		} else {
 			console.log("FALSE");
 		}
