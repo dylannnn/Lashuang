@@ -40,7 +40,7 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 			$scope._limitNo = data.length;
 			
 			$rootScope.queryWord = getQueryVal()["q"];
-			console.log("$rootScope.queryWord is " + $rootScope.queryWord);
+			
             //Create an array to compare with the query string
 			var words = [];
 			for (var i = 0; i < data.length; i++) {
@@ -141,28 +141,17 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
     $scope._pos = [];
 	$scope.addPos = function () {
 		console.log("You selected something!");
-        if ($scope.word.pos) {
-            $scope._pos.push({
-                pos : $scope.word.pos
-            });
-        }
-        console.dir($scope._pos);
-        //console.dir($scope.word.newWordExp[posItem]);
 	}
-    $scope.delPos = function ($index) {
-        console.log("You deleted a POS");
-        $scope._pos.splice($index, 1);
-        console.dir($scope._pos);
-    }
-
-    
+	
     $scope.addItemOne = function (index) {
-        //$scope.itemOne = $scope.newWordExp;
+        //$scope.itemOne = $scope._newWordExp;
 		if ($scope.word.newWordExp) {
 			console.log("TRUE");
+			$scope._pos.push($scope.word.pos);
 			$scope._newWordExp.push({
 				content: $scope.word.newWordExp
 			});
+
 			console.dir($scope._newWordExp);
 			$scope.word.newWordExp = '';
 		} else {
