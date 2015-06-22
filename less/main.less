@@ -490,19 +490,11 @@ a {
 					display: inline-block;
 					word-break: break-all;
 					line-height: 1.1em;
-					.wordNoExpWrapper {
-						font-size: 18px;
-						color: lighten(#333,50%);
-						font-weight: normal;
-						.quote {
-							font-size: 30px;
-							color: lighten(#333,40%);
-						}
-						.quoteWord {
-							font-weight: bold;
-							color: lighten(#333,40%);
-						}
-					}
+				}
+				.wordNoExpWrapper {
+					font-size: 18px;
+					color: lighten(#333,50%);
+					font-weight: normal;
 				}
 				.subTitle {
 					display: inline-block;
@@ -643,7 +635,12 @@ a {
                         span {color: white}
                     }
                 }
-                ul.listGroup {
+                .listGroup {
+					&.pos {
+						.list {
+							list-style: none;
+						}
+					}
 					margin: 15px 0;
                     padding: 5px 10px;
 					border: 1px dashed #ccc;
@@ -652,7 +649,6 @@ a {
                         margin-left: 20px;
 						padding: 5px 0;
 						border-bottom: 1px dashed #ccc;
-						list-style: none;
 						span.btn {
 							float: right;
 						}

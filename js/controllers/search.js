@@ -93,46 +93,13 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
 		});
 	}
 	
-//	$scope.catalogueDict.$loaded().then(function (data) {
-//		for (var i = 0; i <= data.length; i ++) {
-//			if (data[i].word.indexOf($rootScope.queryWord) != -1) {
-//				
-//			}
-//		}
-//	});
-	
-	
 	$scope.limitNoFunc = function () {
 		$scope.limitNo = $scope.limitNo + 5
 		if ($scope.limitNo >= $scope._limitNo) {
 			$scope.limitNo = $scope._limitNo;
 		}
 	}
-    //Load all vocabulary to Catalogue in the dict page view and add "active" class if the item match the query item
-    //$scope.limitNo <= _limitNo;
-    //Add New Word
-//    $('.successAdded').hide();
-//    $scope.addWord = function () {
-//        console.log("Clicked!");
-//        var ref = new Firebase(FIREBASE_URL);
-//        var dictionary = ref.child('dictionary');
-//
-//        //var dictContent = 
-//        dictionary.push({
-//            word : $scope.word.newWord,
-//            image : $scope.word.imageName
-//        }, function (error) {
-//            if (error) {
-//                console.log('Push failed');
-//            } else {
-//                //$scope.newWord = '';
-//                console.log('Push Successed');
-//                $scope.clearInput();
-//                $scope.added();
-//            }
-//        });
-//    };
-//	
+
     // Put new word explanation to an array
 	$http.get("/data/pos.json").success(function(data) {$scope.pos = data;}).error(function() {console.log("Get JSON failed!")});
 	
@@ -141,16 +108,20 @@ app.controller("searchController", ["$scope", "$rootScope", "$location", "$route
     $scope._pos = [];
 	$scope.addPos = function () {
 		console.log("You selected something!");
+		$scope._pos.push($scope.word.pos);
+		console.log($scope._pos);
+	}
+	$scope.delPos = function ($index) {
+		$scope._pos.splice($index, 1);
+		console.lof($scope._pos);
 	}
 	
-    $scope.addItemOne = function (index) {
+    $scope.addItemOne = function () {
         //$scope.itemOne = $scope._newWordExp;
 		if ($scope.word.newWordExp) {
 			console.log("TRUE");
-			$scope._pos.push($scope.word.pos);
-			$scope._newWordExp.push({
-				content: $scope.word.newWordExp
-			});
+			//$scope._pos.push($scope.word.pos);
+			$scope._newWordExp.push($scope.word.newWordExp[$scope.word.pos]);
 
 			console.dir($scope._newWordExp);
 			$scope.word.newWordExp = '';
