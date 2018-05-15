@@ -1,0 +1,20 @@
+<footer class="container">
+  <div class="row">
+    <div class="col">
+      <p class="text-center text-small text-muted" [ngClass]="{'d-flex flex-column-reverse': displayFlex == true}">
+        <span>&copy; {{getDatetime() | date:'yyyy'}} Copyright. All right reserved.</span>
+        <span [ngClass]="{'d-flex flex-column': displayFlex == true}">
+          <span class="display-block-sm-down">Made with
+            <span class="mx-1">
+              <i class="fas fa-heart animation-beat text-danger"></i>
+            </span> by
+            <a target="_blank" href="http://www.yunfei.li" class="text-black">Yunfei Li</a>.
+          </span>
+          <span class="display-block-sm-down" [ngClass]="{'py-1': displayFlex == true}">Concept by
+            <a target="_blank" href="http://www.yunfei.li" class="text-black">Shuang Xia</a>.
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
