@@ -9,8 +9,8 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
-    "firebase-admin": "^5.9.1",
-    "firebase-functions": "^0.8.1",
+    "firebase-admin": "^11.4.1",
+    "firebase-functions": "^4.1.1",
     "formidable": "^1.1.1",
     "google-cloud": "^0.57.0"
   },
